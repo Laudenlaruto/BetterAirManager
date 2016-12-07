@@ -53,4 +53,52 @@ public class Vol {
             return false;
         }
     }
+
+    public String getNumeroDeVol() {
+        return numeroDeVol;
+    }
+
+    public void setNumeroDeVol(String numeroDeVol) {
+        this.numeroDeVol = numeroDeVol;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Avion getAvion() {
+        return avion;
+    }
+
+    public void setAvion(Avion avion) {
+        this.avion = avion;
+    }
+
+    public Equipage getEquipage() {
+        return equipage;
+    }
+
+    public void setEquipage(Equipage equipage) {
+        this.equipage = equipage;
+    }
 }
