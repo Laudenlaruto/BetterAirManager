@@ -10,4 +10,5 @@ public class Pilote extends MembreEquipage {
         setMetier("Pilote");
     }
 
+
 }

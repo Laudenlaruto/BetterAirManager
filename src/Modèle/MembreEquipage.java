@@ -14,15 +14,18 @@ public abstract class MembreEquipage {
     public MembreEquipage(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
+        qualification = new ArrayList<TypeAvion>();
+    }
+    public String toString(){
+        return (this.getNom()+" "+this.getPrenom()+" "+this.getMetier());
     }
     //Vérifcation si un membre d'équipage est qualifié sur un vol
     public boolean  peutVoler(TypeAvion typeAvion){
-        if(qualification.contains(typeAvion)){
-            return true;
-        }else{ return false;}
+        return (qualification.contains(typeAvion));
+
     }
     public boolean addQualification(TypeAvion typeAvion) throws EquipageException, InvariantBroken{
-        if(qualification.size()<=2){
+        if(qualification.size()>2){
             throw new EquipageException(1);
         }else{
             qualification.add(typeAvion);

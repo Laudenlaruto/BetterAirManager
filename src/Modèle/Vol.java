@@ -25,21 +25,26 @@ public class Vol {
         this.date = dep;
     }
     public void addPilote(Pilote pilote) throws EquipageException{
-        if(!equipage.pilotIsSet()){
-            equipage.setPilote(pilote);
+        if(pilote.peutVoler(avion.getTypeAvion())) {
+            if (equipage.pilotIsSet()) {
+                equipage.setPilote(pilote);
+            } else {
+                throw new EquipageException(2);
+            }
         }else{
-            throw new EquipageException(2);
+            throw new EquipageException(4);
         }
     }
     public void addCoPilote(CoPilote coPilote) throws EquipageException{
-        if(!equipage.coPilotIsSet()){
+        if(equipage.coPilotIsSet() && coPilote.peutVoler(avion.getTypeAvion())){
             equipage.setCoPilote(coPilote);
         }else{
             throw new EquipageException(2);
         }
     }
     public void addPNC(PNC pnc) throws EquipageException{
-        if(avion.getTypeAvion().getNbNPCmax()>equipage.getPNC().size()){
+        if(avion.getTypeAvion().getNbNPCmax()>
+                equipage.getPNC().size() && pnc.peutVoler(avion.getTypeAvion())){
             equipage.getPNC().add(pnc);
         }else{
             throw new EquipageException(3);
@@ -47,11 +52,7 @@ public class Vol {
 
     }
     public boolean equipagaAuComplet(){
-        if(equipage.pilotIsSet() && equipage.coPilotIsSet() && equipage.getPNC().size()>avion.getTypeAvion().getNbPNCmin()){
-            return true;
-        }else{
-            return false;
-        }
+        return (!equipage.pilotIsSet() && !equipage.coPilotIsSet() && equipage.getPNC().size()>=avion.getTypeAvion().getNbPNCmin() && equipage.getPNC().size()<=avion.getTypeAvion().getNbNPCmax());
     }
 
     public String getNumeroDeVol() {

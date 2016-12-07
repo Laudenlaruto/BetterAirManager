@@ -1,9 +1,6 @@
 package Test;
 
-import Modèle.Avion;
-import Modèle.TableauVols;
-import Modèle.TypeAvion;
-import Modèle.Vol;
+import Modèle.*;
 
 import java.util.Date;
 
@@ -13,16 +10,48 @@ import java.util.Date;
 public class Comet {
 
     public static void main(String[] args){
-        System.out.print("Hey");
+        System.out.print("Welcome to BetterAirManager BAM\n");
         new Comet();
 
     }
-    public Comet(){
+    private Comet(){
         TableauVols tab1 = new TableauVols("Betty");
-        TypeAvion typ1 = new TypeAvion("A380",10,30);
+        TypeAvion typ1 = new TypeAvion("A380",3,5);
         Avion avion1 = new Avion(typ1,"FR01");
         Vol volFR = new Vol("FR01","Paris","London",avion1,new Date());
-        System.out.println(volFR.getSite().toString());
+        Equipage equipage1 = new Equipage(volFR);
+        volFR.setEquipage(equipage1);
+        Pilote pilote1 = new Pilote("Jean","pilote");
+        CoPilote coPilote1 = new CoPilote("Loic","Dupoont");
+        PNC pnc1 = new PNC("TOTO","Francois");
+        PNC pnc2 = new PNC("T","Francois");
+        PNC pnc3 = new PNC("TOT","Francois");
+
+        try {
+            pnc1.addQualification(typ1);
+            pilote1.addQualification(typ1);
+            coPilote1.addQualification(typ1);
+            pnc2.addQualification(typ1);
+            pnc3.addQualification(typ1);
+            volFR.addPilote(pilote1);
+            volFR.addCoPilote(coPilote1);
+            volFR.addPNC(pnc1);
+            volFR.addPNC(pnc2);
+            volFR.addPNC(pnc3);
+        } catch (EquipageException e) {
+            e.printStackTrace();
+        } catch (InvariantBroken invariantBroken) {
+            invariantBroken.printStackTrace();
+        }
+        volFR.getEquipage().pilotToString();
+        volFR.getEquipage().coPilotToString();
+        volFR.getEquipage().pncToString();
+        if(volFR.equipagaAuComplet()){
+            System.out.println("Oui complet");
+        }
+
+        Pilote pilote2 = new Pilote("Pierre","lioi");
+
     }
 }
 

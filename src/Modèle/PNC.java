@@ -8,4 +8,5 @@ public class PNC extends MembreEquipage{
         super(nom, prenom);
         setMetier("PNC");
     }
+
 }
