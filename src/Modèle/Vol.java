@@ -13,13 +13,15 @@ public class Vol {
     private Avion avion;
     private Equipage equipage;
 
-    public Vol(String num, String site, String dest, Avion avion, Date depart){
-      this.numeroDeVol=num;
-      this.site = site;
-      this.destination = dest;
-      this.date = depart;
-      this.avion = avion;
+
+    public Vol(String numeroDeVol, String site, String destination, Date date, Avion avion) {
+        this.numeroDeVol = numeroDeVol;
+        this.site = site;
+        this.destination = destination;
+        this.date = date;
+        this.avion = avion;
     }
+
     public Vol(String num, Date dep){
         this.numeroDeVol = num;
         this.date = dep;
@@ -43,7 +45,7 @@ public class Vol {
         }
     }
     public void addPNC(PNC pnc) throws EquipageException{
-        if(avion.getTypeAvion().getNbNPCmax()>
+        if(avion.getTypeAvion().getNbPNCmax()>
                 equipage.getPNC().size() && pnc.peutVoler(avion.getTypeAvion())){
             equipage.getPNC().add(pnc);
         }else{
@@ -52,7 +54,7 @@ public class Vol {
 
     }
     public boolean equipagaAuComplet(){
-        return (!equipage.pilotIsSet() && !equipage.coPilotIsSet() && equipage.getPNC().size()>=avion.getTypeAvion().getNbPNCmin() && equipage.getPNC().size()<=avion.getTypeAvion().getNbNPCmax());
+        return (!equipage.pilotIsSet() && !equipage.coPilotIsSet() && equipage.getPNC().size()>=avion.getTypeAvion().getNbPNCmin() && equipage.getPNC().size()<=avion.getTypeAvion().getNbPNCmax());
     }
 
     public String getNumeroDeVol() {

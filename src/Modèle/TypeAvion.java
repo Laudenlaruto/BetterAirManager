@@ -6,12 +6,12 @@ package Modèle;
 public class TypeAvion {
     private String nom;
     private int nbPNCmin;
-    private int nbNPCmax;
+    private int nbPNCmax;
 
-    public TypeAvion(String nom, int nbPNCmin, int nbNPCmax) {
+    public TypeAvion(String nom, int nbPNCmin, int nbPNCmax) {
         this.nom = nom;
         this.nbPNCmin = nbPNCmin;
-        this.nbNPCmax = nbNPCmax;
+        this.nbPNCmax = nbPNCmax;
     }
 
     public TypeAvion(String nom) {
@@ -34,11 +34,11 @@ public class TypeAvion {
         this.nbPNCmin = nbPNCmin;
     }
 
-    public int getNbNPCmax() {
-        return nbNPCmax;
+    public int getNbPNCmax() {
+        return nbPNCmax;
     }
 
-    public void setNbNPCmax(int nbNPCmax) {
-        this.nbNPCmax = nbNPCmax;
+    public void setNbPNCmax(int nbPNCmax) {
+        this.nbPNCmax = nbPNCmax;
     }
 }

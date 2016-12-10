@@ -8,7 +8,7 @@ import java.util.Objects;
  * Created by Titan on 10/12/2016.
  */
 public class Aeroports implements Serializable {
-    private File fichierAeroports = new File("src/Fichier/aeroports.txt");
+    private File fichierAeroports = new File("src/DataBase/aeroports.txt");
     private ArrayList<String> nomAeroports;
     public Aeroports(){
         BufferedReader br = null;

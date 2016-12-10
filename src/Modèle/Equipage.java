@@ -13,7 +13,15 @@ public class Equipage {
         private ArrayList<PNC> PNC;
         private Vol vol;
 
-        public Equipage(Vol vol){
+    public Equipage(Pilote pilote, CoPilote coPilote, ArrayList<Modèle.PNC> PNC, Vol vol) {
+        this.pilote = pilote;
+        this.coPilote = coPilote;
+        this.PNC = PNC;
+        this.vol = vol;
+    }
+
+    public Equipage(Vol vol){
+
             this.vol =vol;
             this.PNC = new ArrayList<PNC>();
         }

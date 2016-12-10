@@ -18,7 +18,7 @@ public class Comet {
         TableauVols tab1 = new TableauVols("Betty");
         TypeAvion typ1 = new TypeAvion("A380",3,5);
         Avion avion1 = new Avion(typ1,"FR01");
-        Vol volFR = new Vol("FR01","Paris","London",avion1,new Date());
+        Vol volFR = new Vol("FR01","Paris","London",new Date(),avion1);
         Equipage equipage1 = new Equipage(volFR);
         volFR.setEquipage(equipage1);
         Pilote pilote1 = new Pilote("Jean","pilote");

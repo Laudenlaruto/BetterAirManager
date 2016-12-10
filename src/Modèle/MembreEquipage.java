@@ -1,5 +1,7 @@
 package Modèle;
 
+import DataBase.TypeMembreEquipage;
+
 import java.util.ArrayList;
 
 /**
@@ -8,10 +10,10 @@ import java.util.ArrayList;
 public abstract class MembreEquipage {
     private String nom;
     private String prenom;
-    private String metier;
+    private TypeMembreEquipage metier;
     private ArrayList<TypeAvion> qualification;
 
-    public MembreEquipage(String nom, String prenom, String metier) {
+    public MembreEquipage(String nom, String prenom, TypeMembreEquipage metier) {
         this.nom = nom;
         this.prenom = prenom;
         this.metier = metier;
@@ -49,12 +51,21 @@ public abstract class MembreEquipage {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-    public String getMetier() {
+
+    public TypeMembreEquipage getMetier() {
         return metier;
     }
 
-    public void setMetier(String metier) {
+    public void setMetier(TypeMembreEquipage metier) {
         this.metier = metier;
+    }
+
+    public ArrayList<TypeAvion> getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(ArrayList<TypeAvion> qualification) {
+        this.qualification = qualification;
     }
 
     public void setNom(String nom) {
