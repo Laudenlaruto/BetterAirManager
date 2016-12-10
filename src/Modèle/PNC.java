@@ -5,8 +5,7 @@ package Modèle;
  */
 public class PNC extends MembreEquipage{
     public PNC(String nom, String prenom) {
-        super(nom, prenom);
-        setMetier("PNC");
+        super(nom, prenom,"PNC");
     }
 
 }

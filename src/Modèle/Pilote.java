@@ -6,8 +6,7 @@ package Modèle;
 public class Pilote extends MembreEquipage {
 
     public Pilote(String nom, String prenom){
-        super(nom,prenom);
-        setMetier("Pilote");
+        super(nom,prenom,"Pilote");
     }
 
 

@@ -11,9 +11,10 @@ public abstract class MembreEquipage {
     private String metier;
     private ArrayList<TypeAvion> qualification;
 
-    public MembreEquipage(String nom, String prenom) {
+    public MembreEquipage(String nom, String prenom, String metier) {
         this.nom = nom;
         this.prenom = prenom;
+        this.metier = metier;
         qualification = new ArrayList<TypeAvion>();
     }
     public String toString(){

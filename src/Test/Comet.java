@@ -27,7 +27,15 @@ public class Comet {
         PNC pnc2 = new PNC("T","Francois");
         PNC pnc3 = new PNC("TOT","Francois");
 
-        try {
+        Aeroports listeAeroports = new Aeroports();
+        listeAeroports.addAeroports("Paris");
+        listeAeroports.lectureAeroports();
+        System.out.println(listeAeroports);
+        listeAeroports.resetAeroports();
+        System.out.println(listeAeroports);
+
+
+        /*try {
             pnc1.addQualification(typ1);
             pilote1.addQualification(typ1);
             coPilote1.addQualification(typ1);
@@ -39,9 +47,9 @@ public class Comet {
             volFR.addPNC(pnc2);
             volFR.addPNC(pnc3);
         } catch (EquipageException e) {
-            e.printStackTrace();
+            e.toString();
         } catch (InvariantBroken invariantBroken) {
-            invariantBroken.printStackTrace();
+            invariantBroken.toString();
         }
         volFR.getEquipage().pilotToString();
         volFR.getEquipage().coPilotToString();
@@ -51,7 +59,7 @@ public class Comet {
         }
 
         Pilote pilote2 = new Pilote("Pierre","lioi");
-
+*/
     }
 }
 
