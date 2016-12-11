@@ -81,6 +81,14 @@ public class Equipage {
             this.PNC = PNC;
         }
 
+    public Vol getVol() {
+        return vol;
+    }
+
+    public void setVol(Vol vol) {
+        this.vol = vol;
+    }
+
     public void pilotToString() {
             if(!pilotIsSet()){
                 System.out.println(this.getPilote());

@@ -13,7 +13,9 @@ public class TypeAvion {
         this.nbPNCmin = nbPNCmin;
         this.nbPNCmax = nbPNCmax;
     }
-
+    public String toString(){
+        return nom;
+    }
     public TypeAvion(String nom) {
         this.nom = nom;
     }

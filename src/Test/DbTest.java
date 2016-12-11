@@ -1,6 +1,7 @@
 package Test;
 
 import DataBase.Database;
+import Modèle.TableauVols;
 
 /**
  * Created by Titan on 10/12/2016.
@@ -12,6 +13,7 @@ public class DbTest {
         new DbTest();
     }
     private DbTest(){
-        Database dbTest = new Database();
+
+        TableauVols tab = new TableauVols("Tab");
     }
 }

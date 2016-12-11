@@ -26,7 +26,6 @@ public class DbVol extends Database {
 
                 Vol vol = new Vol(res.getString("numvol"),res.getString("site"),res.getString("dest"),res.getDate("date"),
                         DBAvion.findAvion(res.getString("avion")));
-
                         vol.setEquipage(DBEquipage.findEquipage(vol));
 
                 vols.add(vol);
@@ -38,6 +37,23 @@ public class DbVol extends Database {
             e.printStackTrace();
         }
         return vols;
+    }
+    public static Vol findVol(String equipage){
+        Vol vol;
+        try {
+            Statement stt = con.createStatement();
+            ResultSet res = stt.executeQuery("SELECT * FROM vol WHERE numvol='"+equipage+"'");
+            vol = new Vol(res.getString("numvol"),
+                    res.getString("site"),
+                    res.getString("dest"),
+                    res.getDate("date"),
+                    DBAvion.findAvion(res.getString("avion")));
+            return vol;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

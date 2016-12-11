@@ -10,7 +10,10 @@ public class Avion {
         this.typeAvion = typeAvion;
         this.ref = ref;
     }
+    public String toString(){
 
+        return typeAvion.toString() + " - "+ ref;
+    }
     public TypeAvion getTypeAvion() {
         return typeAvion;
     }
