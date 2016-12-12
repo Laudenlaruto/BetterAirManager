@@ -3,6 +3,7 @@ package Modèle;
 import DataBase.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -21,25 +22,64 @@ public class TableauVols {
     private DBMembreEquipage dbMembreEquipage;
     private DBEquipage dbEquipage;
     public TableauVols(String name) {
-        Name = name;
+        this.Name = name;
         dbVol = new DbVol();
         dbTypeAvion = new DBTypeAvion();
         dbAvion = new DBAvion();
         dbMembreEquipage = new DBMembreEquipage();
         dbEquipage = new DBEquipage();
+
+        tableauAvion = dbAvion.loadAvion();
         tableauDeVols = dbVol.loadVol();
         tablaeuTypeAvion = dbTypeAvion.loadTypeAvion();
-        tableauAvion = dbAvion.loadAvion();
-        //dbAvion.addAvion(tablaeuTypeAvion.get(0),"FR15");
-        //MembreEquipage.addMembreEquipage();
-        System.out.println(tableauAvion.get(0).toString());
         tableauMembreEquipage = dbMembreEquipage.loadMembreEquipages();
-        System.out.println(tableauMembreEquipage.get(0).toString());
         tableauEquipage = dbEquipage.loadEquipages();
+
+
+
     }
-    public void addVol(String num, String site, String destination, Avion avion, Date date){
-        Vol vol = new Vol("FR01","Paris","London",new Date(),avion);
-        tableauDeVols.add(vol);
+    public void addVol(Vol vol){
+        dbVol.addVol(vol);
     }
+    public void deleteVol(Vol vol){
+        dbVol.deleteVol(vol);
+    }
+    public void addAvion(Avion avion){
+        dbAvion.addAvion(avion);
+    }
+    public void deleteAvion(Avion avion){
+        dbAvion.deleteAvion(avion);
+    }
+    public void addTypeAvion(TypeAvion typeAvion){
+        dbTypeAvion.addTypeAvion(typeAvion);
+    }
+    public void deleteTypeAvion(TypeAvion typeAvion){
+        dbTypeAvion.deleteTypeAvion(typeAvion);
+    }
+    public void addEquipage(Equipage equipage){
+        dbEquipage.addEquipage(equipage);
+    }
+    public void addMembreEquipage(MembreEquipage membreEquipage){
+        dbMembreEquipage.addMembreEquipage(membreEquipage);
+    }
+    public void addMembreEquipageAEquipage(MembreEquipage membreEquipage,Equipage equipage){
+        dbEquipage.addMembreEquiageAEquipage(membreEquipage, equipage);
+    }
+    public void deleteMembreEquipageAEquipage(MembreEquipage membreEquipage,Equipage equipage){
+
+        dbEquipage.deleteMembreEquipageAEquipage(membreEquipage, equipage);
+    }
+    public void addQualification(TypeAvion typeAvion, MembreEquipage membreEquipage){
+        try {
+            membreEquipage.addQualification(typeAvion);
+            dbMembreEquipage.addQualification(typeAvion, membreEquipage);
+        } catch (EquipageException e) {
+            e.printStackTrace();
+        } catch (InvariantBroken invariantBroken) {
+            invariantBroken.printStackTrace();
+        }
+
+    }
+
 
 }

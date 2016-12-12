@@ -11,18 +11,18 @@ public class Equipage {
         private Pilote pilote;
         private CoPilote coPilote;
         private ArrayList<PNC> PNC;
-        private Vol vol;
+        private String refVol;
 
-    public Equipage(Pilote pilote, CoPilote coPilote, ArrayList<Modèle.PNC> PNC, Vol vol) {
+    public Equipage(Pilote pilote, CoPilote coPilote, ArrayList<Modèle.PNC> PNC, String refVol) {
         this.pilote = pilote;
         this.coPilote = coPilote;
         this.PNC = PNC;
-        this.vol = vol;
+        this.refVol = refVol;
     }
 
-    public Equipage(Vol vol){
+    public Equipage(String refVol){
 
-            this.vol =vol;
+            this.refVol = refVol;
             this.PNC = new ArrayList<PNC>();
         }
         public boolean pilotIsSet(){
@@ -40,6 +40,9 @@ public class Equipage {
                 System.out.println("Pas de PNC sur ce vol");
             }
 
+        }
+        public void addPnc(PNC pnc){
+            this.PNC.add(pnc);
         }
         public boolean isAuMin() {
             return auMin;
@@ -81,12 +84,12 @@ public class Equipage {
             this.PNC = PNC;
         }
 
-    public Vol getVol() {
-        return vol;
+    public String getRefVol() {
+        return refVol;
     }
 
-    public void setVol(Vol vol) {
-        this.vol = vol;
+    public void setRefVol(String refVol) {
+        this.refVol = refVol;
     }
 
     public void pilotToString() {

@@ -17,13 +17,13 @@ public class DBAvion extends Database {
         super();
     }
 
-    public void addAvion(TypeAvion typeAvion, String ref){
+    public void addAvion(Avion avion){
         try {
             Statement stt = con.createStatement();
             String querry = "INSERT into avion VALUES (?, ?)";
             PreparedStatement preparedStmt = this.con.prepareStatement(querry);
-            preparedStmt.setString (1, typeAvion.getNom());
-            preparedStmt.setString    (2, ref);
+            preparedStmt.setString (1, avion.getTypeAvion().getNom());
+            preparedStmt.setString    (2, avion.getRef());
             preparedStmt.executeUpdate();
 
 
@@ -52,7 +52,7 @@ public class DBAvion extends Database {
         Avion avion;
         try {
             Statement stt = con.createStatement();
-            ResultSet res = stt.executeQuery("SELECT * FROM avion WHERE nom ='"+ref+"'");
+            ResultSet res = stt.executeQuery("SELECT * FROM avion WHERE Ref ='"+ref+"'");
             res.next();
             avion = new Avion(DBTypeAvion.findTypeAvion(res.getString("TypeAvion")),res.getString("ref"));
             return avion;
@@ -61,5 +61,17 @@ public class DBAvion extends Database {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteAvion(Avion avion) {
+        try {
+            Statement stt = con.createStatement();
+            String query = "DELETE FROM avion WHERE Ref = ? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString (1, avion.getRef());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

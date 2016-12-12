@@ -4,9 +4,7 @@ import Modèle.Avion;
 import Modèle.Equipage;
 import Modèle.Vol;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +15,22 @@ public class DbVol extends Database {
     public DbVol(){
         super();
     }
+    public void addVol(Vol vol){
+        try {
+            Statement stt = con.createStatement();
+            String query = "insert into vol values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStmt = this.con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString (1, vol.getNumeroDeVol());
+            preparedStmt.setString (2, vol.getSite());
+            preparedStmt.setString (3, vol.getDestination());
+            preparedStmt.setDate(4, vol.getDate());
+            preparedStmt.setString(5,vol.getAvion().getRef());
+            preparedStmt.setString(6,vol.getNumeroDeVol());
+            preparedStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public ArrayList<Vol>loadVol(){
         ArrayList<Vol> vols = new ArrayList<Vol>();
         try {
@@ -24,7 +38,11 @@ public class DbVol extends Database {
             ResultSet res = stt.executeQuery("SELECT * FROM vol");
             while (res.next()) {
 
-                Vol vol = new Vol(res.getString("numvol"),res.getString("site"),res.getString("dest"),res.getDate("date"),
+                Vol vol = new Vol(
+                        res.getString("numvol"),
+                        res.getString("site"),
+                        res.getString("dest"),
+                        res.getDate("date"),
                         DBAvion.findAvion(res.getString("avion")));
                         vol.setEquipage(DBEquipage.findEquipage(vol));
 
@@ -38,17 +56,19 @@ public class DbVol extends Database {
         }
         return vols;
     }
-    public static Vol findVol(String equipage){
+    public static String findVol(String equipage){
         Vol vol;
         try {
             Statement stt = con.createStatement();
             ResultSet res = stt.executeQuery("SELECT * FROM vol WHERE numvol='"+equipage+"'");
-            vol = new Vol(res.getString("numvol"),
+            res.next();
+            vol = new Vol(
+                    res.getString("numvol"),
                     res.getString("site"),
                     res.getString("dest"),
                     res.getDate("date"),
                     DBAvion.findAvion(res.getString("avion")));
-            return vol;
+            return vol.getNumeroDeVol();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,4 +76,17 @@ public class DbVol extends Database {
         return null;
     }
 
+    public void deleteVol(Vol vol) {
+        try {
+            Statement stt = con.createStatement();
+            String query = "DELETE FROM vol WHERE numvol = ? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString (1, vol.getNumeroDeVol());
+            preparedStmt.execute();
+            DBEquipage.deleteEquipage(vol);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
