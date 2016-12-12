@@ -75,4 +75,17 @@ public class DBTypeAvion extends Database {
         }
         return statement;
     }
+
+    public void deleteTypeAvion(TypeAvion typeAvion) {
+        try {
+            Statement stt = con.createStatement();
+            String query = "DELETE FROM typeavion WHERE nom = ? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString (1, typeAvion.getNom());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

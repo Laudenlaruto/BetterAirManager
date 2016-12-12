@@ -9,12 +9,12 @@ public class Vol {
     private String numeroDeVol;
     private String site;
     private String destination;
-    private Date date;
+    private java.sql.Date date;
     private Avion avion;
     private Equipage equipage;
 
 
-    public Vol(String numeroDeVol, String site, String destination, Date date, Avion avion) {
+    public Vol(String numeroDeVol, String site, String destination, java.sql.Date date, Avion avion) {
         this.numeroDeVol = numeroDeVol;
         this.site = site;
         this.destination = destination;
@@ -22,7 +22,7 @@ public class Vol {
         this.avion = avion;
     }
 
-    public Vol(String num, Date dep){
+    public Vol(String num, java.sql.Date dep){
         this.numeroDeVol = num;
         this.date = dep;
     }
@@ -81,11 +81,11 @@ public class Vol {
         this.destination = destination;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 
