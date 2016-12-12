@@ -19,7 +19,7 @@ public class DbVol extends Database {
         try {
             Statement stt = con.createStatement();
             String query = "insert into vol values (?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStmt = this.con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, vol.getNumeroDeVol());
             preparedStmt.setString (2, vol.getSite());
             preparedStmt.setString (3, vol.getDestination());
@@ -56,7 +56,7 @@ public class DbVol extends Database {
         }
         return vols;
     }
-    public static String findVol(String equipage){
+    public static Vol findVol(String equipage){
         Vol vol;
         try {
             Statement stt = con.createStatement();
@@ -68,7 +68,7 @@ public class DbVol extends Database {
                     res.getString("dest"),
                     res.getDate("date"),
                     DBAvion.findAvion(res.getString("avion")));
-            return vol.getNumeroDeVol();
+            return vol;
         } catch (SQLException e) {
             e.printStackTrace();
         }

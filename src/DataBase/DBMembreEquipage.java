@@ -19,7 +19,7 @@ public class DBMembreEquipage extends Database {
         try {
             Statement stt = con.createStatement();
             String query = "insert into membreequipage values (?, ?, ?, ?,? )";
-            PreparedStatement preparedStmt = this.con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, membreEquipage.getNom());
             preparedStmt.setString (2,membreEquipage.getPrenom());
             preparedStmt.setString (3, membreEquipage.getMetier().toString());
@@ -97,18 +97,20 @@ public class DBMembreEquipage extends Database {
         try {
             Statement stt = con.createStatement();
             ResultSet res = stt.executeQuery("SELECT * FROM membreequipage WHERE Nom ='"+nom+"' AND Metier ='"+ TypeMembreEquipage.PILOTE.toString()+"'");
-            res.next();
-            pilote = new Pilote(res.getString("Nom"), res.getString("Prenom"));
-            res.getString("qualif1");
-            if(!res.wasNull()){
-                pilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif1")));
-            }
-            res.getString("qualif2");
-            if(!res.wasNull()){
-                pilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif2")));
-            }
+            if(res.next()) {
+                pilote = new Pilote(res.getString("Nom"), res.getString("Prenom"));
+                res.getString("qualif1");
+                if (!res.wasNull()) {
+                    pilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif1")));
+                }
+                res.getString("qualif2");
+                if (!res.wasNull()) {
+                    pilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif2")));
+                }
 
-            return pilote;
+
+                return pilote;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (EquipageException e) {
@@ -118,6 +120,71 @@ public class DBMembreEquipage extends Database {
         }
         return null;
 
+    }
+    public static ArrayList<Vol> findVolByMembreEquipage(String nom){
+        ArrayList<Vol> vols = new ArrayList<Vol>();
+        try {
+            Statement stt = con.createStatement();
+            ResultSet res = stt.executeQuery("SELECT * FROM vol");
+            while (res.next()){
+                Statement stt2 = con.createStatement();
+                ResultSet res2 = stt2.executeQuery("SELECT * FROM equipage " +
+                        "WHERE volRefNpc='"+ res.getString("numvol")+"' AND Pilot ='"+nom+"'");
+                if(res2.next()){
+                    vols.add(DbVol.findVol(res.getString("numvol")));
+                }
+                ResultSet res3 = stt2.executeQuery("SELECT * FROM equipage " +
+                        "WHERE volRefNpc='"+ res.getString("numvol")+"' AND Copilot ='"+nom+"'");
+                if(res3.next()){
+                    vols.add(DbVol.findVol(res.getString("numvol")));
+                }
+                ResultSet res4 = stt2.executeQuery("SELECT * FROM assocpncequipage " +
+                        "WHERE refEquipage='"+ res.getString("numvol")+"' AND nompnc ='"+nom+"'");
+                if(res4.next()){
+                    vols.add(DbVol.findVol(res.getString("numvol")));
+                }
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return vols;
+    }
+    public  static  PNC findMembreEquipagePNCByNom(String nom){
+        PNC pnc;
+        try {
+            Statement stt = con.createStatement();
+            ResultSet res = stt.executeQuery("SELECT * FROM assocpncequipage WHERE Nom ='"+ nom+"'");
+            while (res.next()) {
+                Statement stt2 = con.createStatement();
+                ResultSet res2 = stt2.executeQuery("SELECT * FROM membreequipage WHERE Nom ='"+ res.getString("nompnc")+"'");
+                res2.next();
+
+                pnc = new PNC(res2.getString("Nom"),res2.getString("Prenom"));
+                res2.getString("qualif1");
+                if(!res2.wasNull()){
+                    pnc.addQualification(DBTypeAvion.findTypeAvion(res2.getString("qualif1")));
+                }
+                res2.getString("qualif2");
+                if(!res2.wasNull()){
+                    pnc.addQualification(DBTypeAvion.findTypeAvion(res2.getString("qualif2")));
+                }
+
+                return pnc;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (EquipageException e) {
+            e.printStackTrace();
+        } catch (InvariantBroken invariantBroken) {
+            invariantBroken.printStackTrace();
+        }
+        return null;
     }
     public static ArrayList<PNC> findMembreEquipagePNC(String numeroDeVol) {
         ArrayList<PNC> pncs = new ArrayList<PNC>();
@@ -192,13 +259,13 @@ public class DBMembreEquipage extends Database {
             res.getString("qualif1");
             if(res.wasNull()){
                 String querry = "UPDATE membreequipage SET qualif1 = ? WHERE Nom = ?";
-                PreparedStatement preparedStmt = this.con.prepareStatement(querry);
+                PreparedStatement preparedStmt = con.prepareStatement(querry);
                 preparedStmt.setString (1, typeAvion.getNom());
                 preparedStmt.setString(2,membreEquipage.getNom());
                 preparedStmt.executeUpdate();
             }else {
                 String querry = "UPDATE membreequipage SET qualif2 = ? WHERE Nom = ?";
-                PreparedStatement preparedStmt = this.con.prepareStatement(querry);
+                PreparedStatement preparedStmt = con.prepareStatement(querry);
                 preparedStmt.setString (1, typeAvion.getNom());
                 preparedStmt.setString(2,membreEquipage.getNom());
                 preparedStmt.executeUpdate();

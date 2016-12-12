@@ -68,7 +68,7 @@ public class DBEquipage extends Database {
                 equipage = new Equipage(DBMembreEquipage.findMembreEquipagePilote(res.getString("Pilot")),
                         DBMembreEquipage.findMembreEquipageCoPilot(res.getString("Copilot")),
                         DBMembreEquipage.findMembreEquipagePNC(vol.getNumeroDeVol())
-                        , vol.getNumeroDeVol());
+                        , vol);
 
                 return equipage;
             }

@@ -38,6 +38,9 @@ public class TableauVols {
 
 
     }
+    public ArrayList<Vol> findVolByMembreEquipage(String nom){
+        return DBMembreEquipage.findVolByMembreEquipage(nom);
+    }
     public void addVol(Vol vol){
         dbVol.addVol(vol);
     }

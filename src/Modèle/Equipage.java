@@ -13,16 +13,16 @@ public class Equipage {
         private ArrayList<PNC> PNC;
         private String refVol;
 
-    public Equipage(Pilote pilote, CoPilote coPilote, ArrayList<Modèle.PNC> PNC, String refVol) {
+    public Equipage(Pilote pilote, CoPilote coPilote, ArrayList<Modèle.PNC> PNC, Vol refVol) {
         this.pilote = pilote;
         this.coPilote = coPilote;
         this.PNC = PNC;
-        this.refVol = refVol;
+        this.refVol = refVol.getNumeroDeVol();
     }
 
-    public Equipage(String refVol){
+    public Equipage(Vol refVol){
 
-            this.refVol = refVol;
+            this.refVol = refVol.getNumeroDeVol();
             this.PNC = new ArrayList<PNC>();
         }
         public boolean pilotIsSet(){
