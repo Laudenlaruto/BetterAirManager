@@ -1,6 +1,5 @@
 package Modèle;
 
-import java.util.Date;
 
 /**
  * Created by ben_s on 29/11/2016.
@@ -13,7 +12,9 @@ public class Vol {
     private Avion avion;
     private Equipage equipage;
 
-
+    public boolean equipageIsSet(){
+        return (this.getEquipage()==null);
+    }
     public Vol(String numeroDeVol, String site, String destination, java.sql.Date date, Avion avion) {
         this.numeroDeVol = numeroDeVol;
         this.site = site;

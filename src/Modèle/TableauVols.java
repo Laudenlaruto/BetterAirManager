@@ -81,5 +81,51 @@ public class TableauVols {
 
     }
 
+    public ArrayList<Avion> getTableauAvion() {
+        return tableauAvion;
+    }
 
+    public void setTableauAvion(ArrayList<Avion> tableauAvion) {
+        this.tableauAvion = tableauAvion;
+    }
+
+    public ArrayList<TypeAvion> getTablaeuTypeAvion() {
+        return tablaeuTypeAvion;
+    }
+
+    public void setTablaeuTypeAvion(ArrayList<TypeAvion> tablaeuTypeAvion) {
+        this.tablaeuTypeAvion = tablaeuTypeAvion;
+    }
+
+    public ArrayList<MembreEquipage> getTableauMembreEquipage() {
+        return tableauMembreEquipage;
+    }
+
+    public void setTableauMembreEquipage(ArrayList<MembreEquipage> tableauMembreEquipage) {
+        this.tableauMembreEquipage = tableauMembreEquipage;
+    }
+
+    public ArrayList<Equipage> getTableauEquipage() {
+        return tableauEquipage;
+    }
+
+    public void setTableauEquipage(ArrayList<Equipage> tableauEquipage) {
+        this.tableauEquipage = tableauEquipage;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public ArrayList<Vol> getTableauDeVols() {
+        return tableauDeVols;
+    }
+
+    public void setTableauDeVols(ArrayList<Vol> tableauDeVols) {
+        this.tableauDeVols = tableauDeVols;
+    }
 }

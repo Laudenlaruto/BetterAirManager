@@ -60,17 +60,18 @@ public class DBEquipage extends Database {
     }
     public static Equipage findEquipage(Vol vol){
         Equipage equipage;
+
         try {
             Statement stt = con.createStatement();
             ResultSet res = stt.executeQuery("SELECT * FROM equipage WHERE volRefNpc ='"+vol.getNumeroDeVol()+"'");
-            res.next();
+            if(res.next()) {
+                equipage = new Equipage(DBMembreEquipage.findMembreEquipagePilote(res.getString("Pilot")),
+                        DBMembreEquipage.findMembreEquipageCoPilot(res.getString("Copilot")),
+                        DBMembreEquipage.findMembreEquipagePNC(vol.getNumeroDeVol())
+                        , vol.getNumeroDeVol());
 
-            equipage = new Equipage(DBMembreEquipage.findMembreEquipagePilote(res.getString("Pilot")),
-                    DBMembreEquipage.findMembreEquipageCoPilot(res.getString("Copilot")),
-                    DBMembreEquipage.findMembreEquipagePNC(vol.getNumeroDeVol())
-                    ,vol.getNumeroDeVol());
-            return equipage;
-
+                return equipage;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

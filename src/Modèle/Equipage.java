@@ -31,6 +31,7 @@ public class Equipage {
         public boolean coPilotIsSet(){
             return(this.getCoPilote() == null);
         }
+        public boolean PNCIsSet(){return (this.getPNC()== null);}
         public void pncToString(){
             if(PNC!=null){
                 for (PNC pnc : PNC){
