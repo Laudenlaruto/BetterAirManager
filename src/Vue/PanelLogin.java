@@ -12,9 +12,8 @@ import java.awt.event.ActionListener;
  * Created by Titan on 12/12/2016.
  */
 public class PanelLogin extends JFrame{
-    private JLabel labelTtitre;
+    private JLabel labelTitre;
     private JPanel panelMain;
-    private JScrollPane scrollPane;
     private JButton adminButton;
     private JButton managerButton;
     private JButton afficherTableauButton;
@@ -22,36 +21,41 @@ public class PanelLogin extends JFrame{
     private JPanel interfaceBouton;
     private JPanel TitleName;
     private JPanel panelInterface;
-    private CardLayout diapoInterface = new CardLayout();
-    private PanelTableau panelTableau;
     private static TableauVols tableauVols;
     public PanelLogin(){
         setSize(new Dimension(700,700));
         setContentPane(panelMain);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        CardLayout card =(CardLayout)panelInterface.getLayout();
         tableauVols = new TableauVols("Tableau De Vols");
-        panelInterface.setLayout(diapoInterface);
-        panelTableau = new PanelTableau(tableauVols);
-        diapoInterface.addLayoutComponent(panelTableau,"TableauVols");
-        panelInterface.setVisible(true);
-        diapoInterface.show(panelInterface,"TableauVols");
-        //TODO Faire cardLayout
+
 
         afficherTableauButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                diapoInterface.show(panelInterface,"TableauVols");
+                card.show(panelInterface,"PanelTab");
             }
         });
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                card.show(panelInterface,"PanelAdmin");
             }
         });
-
+        managerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                card.show(panelInterface,"PanelManager");
+            }
+        });
+        membreEquipageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                card.show(panelInterface,"PanelMembreEquipage");
+            }
+        });
     }
 
 
@@ -60,4 +64,6 @@ public class PanelLogin extends JFrame{
         PanelLogin p = new PanelLogin();
 
     }
+
+
 }

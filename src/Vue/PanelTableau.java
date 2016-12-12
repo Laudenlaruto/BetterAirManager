@@ -13,7 +13,9 @@ public class PanelTableau extends JPanel{
     private JTable table1;
     private JScrollPane scrollPane;
 
-    public PanelTableau(TableauVols tableauVols){
+
+    public PanelTableau(){
+        TableauVols tableauVols = new TableauVols("Table de vols");
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("NumVol");
         defaultTableModel.addColumn("Site");
