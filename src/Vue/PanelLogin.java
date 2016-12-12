@@ -22,7 +22,7 @@ public class PanelLogin extends JFrame{
     private JPanel panelInterface;
     private static TableauVols tableauVols;
     public PanelLogin(){
-        setSize(new Dimension(700,700));
+        setSize(new Dimension(1000,700));
         setContentPane(panelMain);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

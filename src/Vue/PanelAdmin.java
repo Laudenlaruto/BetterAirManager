@@ -1,6 +1,9 @@
 package Vue;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by ben_s on 12/12/2016.
@@ -20,4 +23,14 @@ public class PanelAdmin extends JPanel{
     private JPanel panelBoutonUp;
     private JPanel panelBoutonDown;
     private JPanel panelMain;
+
+    public PanelAdmin() {
+        CardLayout card =(CardLayout)panelMain.getLayout();
+        créerTypeAvionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                card.show(panelMain,"CreationTypeAvion");
+            }
+        });
+    }
 }
