@@ -8,9 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- * Created by Titan on 13/12/2016.
- */
 public class AjouterAEquipage extends JPanel{
     private JComboBox comboBoxVol;
     private JComboBox comboBoxPNC;
@@ -18,6 +15,18 @@ public class AjouterAEquipage extends JPanel{
     private JPanel panelAjoutEquipage;
     private TableauVols tableauVols;
     public AjouterAEquipage() {
+        tableauVols = new TableauVols("AjoutEquipage");
+
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
+                comboBoxPNC.removeItem((MembreEquipage)comboBoxPNC.getSelectedItem());
+            }
+        });
+    }
+
+    public void update() {
         tableauVols = new TableauVols("AjoutEquipage");
         ArrayList<Vol> vols = tableauVols.getTableauDeVols();
         ArrayList<MembreEquipage> pncs = tableauVols.getTableauMembreEquipage();
@@ -36,17 +45,5 @@ public class AjouterAEquipage extends JPanel{
             }
         }
         comboBoxPNC.setModel(defPNC);
-
-
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
-            }
-        });
-    }
-
-    public void update() {
-        tableauVols = new TableauVols("AjoutEquipage");
     }
 }

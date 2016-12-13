@@ -5,9 +5,6 @@ import Modèle.TableauVols;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * Created by ben_s on 12/12/2016.
- */
 public class PanelTableau extends JPanel{
     private JPanel panelTableau;
     private JTable table1;

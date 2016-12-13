@@ -112,20 +112,20 @@ public class DBEquipage extends Database {
         try {
             if (membreEquipage.getMetier().equals(TypeMembreEquipage.PNC)) {
                 Statement stt = con.createStatement();
-                String query = "DELETE assocpncequipage where refEquipage = ? AND nompnc = ?";
+                String query = "DELETE FROM assocpncequipage where refEquipage = ? AND nompnc = ?";
                 PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStmt.setString(1, equipage.getRefVol());
                 preparedStmt.setString(2, membreEquipage.getNom());
                 preparedStmt.execute();
             } else if (membreEquipage.getMetier().equals(TypeMembreEquipage.PILOTE)) {
                 Statement stt = con.createStatement();
-                String query = "DELETE equipage WHERE Pilot = ?";
+                String query = "DELETE FROM equipage WHERE Pilot = ?";
                 PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStmt.setString(1, membreEquipage.getNom());
                 preparedStmt.execute();
             } else {
                 Statement stt = con.createStatement();
-                String query = "DELETE equipage where Copilot = ?)";
+                String query = "DELETE FROM equipage where Copilot = ?)";
                 PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStmt.setString(1, membreEquipage.getNom());
                 preparedStmt.execute();

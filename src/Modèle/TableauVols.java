@@ -71,9 +71,9 @@ public class TableauVols {
     public void deleteMembreEquipage(MembreEquipage membreEquipage){
         dbMembreEquipage.deleteMembreEquipage(membreEquipage);
     }
-    public void deleteMembreEquipageAEquipage(MembreEquipage membreEquipage,Equipage equipage){
+    public void deleteMembreEquipageAEquipage(MembreEquipage membreEquipage,Vol vol){
 
-        dbEquipage.deleteMembreEquipageAEquipage(membreEquipage, equipage);
+        dbEquipage.deleteMembreEquipageAEquipage(membreEquipage, vol.getEquipage());
     }
     public void addQualification(MembreEquipage membreEquipage){
             dbMembreEquipage.addQualification(membreEquipage);

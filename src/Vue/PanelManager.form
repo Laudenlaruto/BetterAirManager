@@ -64,6 +64,16 @@
               <card name="AjoutEquipage"/>
             </constraints>
           </nested-form>
+          <nested-form id="3d8a6" form-file="Vue/FormulaireManager/DeleteMembre.form" binding="panelSupMem">
+            <constraints>
+              <card name="SupMem"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="c28b" form-file="Vue/FormulaireManager/AfficherVol.form" binding="panelVol">
+            <constraints>
+              <card name="AffVol"/>
+            </constraints>
+          </nested-form>
         </children>
       </grid>
     </children>

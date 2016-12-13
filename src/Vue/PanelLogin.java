@@ -7,9 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Titan on 12/12/2016.
- */
 public class PanelLogin extends JFrame{
     private JLabel labelTitre;
     private JPanel panelMain;
@@ -58,8 +55,6 @@ public class PanelLogin extends JFrame{
             }
         });
     }
-
-
 
     public static void main(String args[]){
         PanelLogin p = new PanelLogin();

@@ -1,15 +1,14 @@
 package Vue;
 
+import Vue.FormulaireManager.AfficherVol;
 import Vue.FormulaireManager.AjouterAEquipage;
+import Vue.FormulaireManager.DeleteMembre;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by ben_s on 12/12/2016.
- */
 public class PanelManager extends JPanel{
     private JButton ajouterMembreDÉquipageButton;
     private JButton retirerUnMembreDButton;
@@ -18,6 +17,8 @@ public class PanelManager extends JPanel{
     private JPanel panelGestionManager;
     private JPanel panelCardManager;
     private AjouterAEquipage panelAjoutEquipage;
+    private DeleteMembre panelSupMem;
+    private AfficherVol panelVol;
 
     public PanelManager() {
         CardLayout card =(CardLayout)panelCardManager.getLayout();
@@ -26,6 +27,20 @@ public class PanelManager extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 panelAjoutEquipage.update();
                 card.show(panelCardManager,"AjoutEquipage");
+            }
+        });
+        retirerUnMembreDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelSupMem.update();
+                card.show(panelCardManager,"SupMem");
+            }
+        });
+        afficherVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelVol.update();
+                card.show(panelCardManager,"AffVol");
             }
         });
     }
