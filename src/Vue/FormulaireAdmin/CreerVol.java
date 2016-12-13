@@ -105,7 +105,6 @@ public class CreerVol extends JPanel {
                 DefaultComboBoxModel<MembreEquipage> defPilot = new DefaultComboBoxModel<>();
                 DefaultComboBoxModel<MembreEquipage> defCoPilot = new DefaultComboBoxModel<>();
                 DefaultComboBoxModel<MembreEquipage> defPNC = new DefaultComboBoxModel<>();
-                DefaultComboBoxModel<MembreEquipage> defPNC2 = new DefaultComboBoxModel<>();
                 for(int i = 0;i<membreEquipages.size();i++){
 
                     if (membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.PILOTE)&& membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){

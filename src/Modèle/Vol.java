@@ -22,7 +22,20 @@ public class Vol {
         this.date = date;
         this.avion = avion;
     }
-
+    public boolean membreEquipageInVol(MembreEquipage membreEquipage){
+        if(this.getEquipage().getPilote().getNom().equals(membreEquipage.getNom())){
+            return true;
+        }
+        if(this.getEquipage().getCoPilote().getNom().equals(membreEquipage.getNom())){
+            return true;
+        }
+        for(int i =0;i < getEquipage().getPNC().size();i++){
+            if(getEquipage().getPNC().get(i).getNom().equals(membreEquipage.getNom())){
+                return true;
+            }
+        }
+        return false;
+    }
     public Vol(String num, java.sql.Date dep){
         this.numeroDeVol = num;
         this.date = dep;

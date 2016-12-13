@@ -83,4 +83,17 @@ public abstract class MembreEquipage {
 
         this.nom = nom;
     }
+
+    public boolean isQualified(Vol vol) {
+        if (qualification.size()==0){
+            return false;
+        }
+        if (qualification.size()==1){
+            return (qualification.get(0).getNom().equals(vol.getAvion().getTypeAvion().getNom()));
+        }
+        if (qualification.size()==2){
+            return (qualification.get(0).getNom().equals(vol.getAvion().getTypeAvion().getNom()) || qualification.get(1).getNom().equals(vol.getAvion().getTypeAvion().getNom()));
+        }
+        return false;
+    }
 }

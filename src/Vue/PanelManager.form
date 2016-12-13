@@ -58,7 +58,13 @@
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <nested-form id="748ef" form-file="Vue/FormulaireManager/AjouterAEquipage.form" binding="panelAjoutEquipage">
+            <constraints>
+              <card name="AjoutEquipage"/>
+            </constraints>
+          </nested-form>
+        </children>
       </grid>
     </children>
   </grid>

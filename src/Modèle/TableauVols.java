@@ -65,8 +65,8 @@ public class TableauVols {
     public void addMembreEquipage(MembreEquipage membreEquipage){
         dbMembreEquipage.addMembreEquipage(membreEquipage);
     }
-    public void addMembreEquipageAEquipage(MembreEquipage membreEquipage,Equipage equipage){
-        dbEquipage.addMembreEquiageAEquipage(membreEquipage, equipage);
+    public void addMembreEquipageAEquipage(MembreEquipage membreEquipage,Vol vol){
+        dbEquipage.addMembreEquiageAEquipage(membreEquipage, vol.getEquipage());
     }
     public void deleteMembreEquipage(MembreEquipage membreEquipage){
         dbMembreEquipage.deleteMembreEquipage(membreEquipage);
