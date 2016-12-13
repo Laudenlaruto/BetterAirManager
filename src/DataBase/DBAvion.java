@@ -69,6 +69,7 @@ public class DBAvion extends Database {
             String query = "DELETE FROM avion WHERE Ref = ? ";
             PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, avion.getRef());
+            preparedStmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

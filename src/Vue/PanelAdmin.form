@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panelAdmin" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="921" height="400"/>
+      <xy x="20" y="20" width="984" height="548"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -34,33 +34,25 @@
               <text value="Supprimer un vol"/>
             </properties>
           </component>
-          <component id="ea677" class="javax.swing.JButton" binding="créerTypeAvionButton" default-binding="true">
+          <component id="11268" class="javax.swing.JButton" binding="créerUnAvionButton" default-binding="true">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Créer Type Avion"/>
+              <text value="Créer un avion"/>
             </properties>
           </component>
-          <component id="ce8ba" class="javax.swing.JButton" binding="créerUnVolButton1" default-binding="true">
+          <component id="47c8c" class="javax.swing.JButton" binding="supprimerAvionButton" default-binding="true">
             <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Créer un vol"/>
-            </properties>
-          </component>
-          <component id="8da5f" class="javax.swing.JButton" binding="qualifierUnMembreDButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Qualifier un membre d'equipage"/>
+              <text value="Supprimer avion"/>
             </properties>
           </component>
         </children>
       </grid>
-      <grid id="20474" binding="panelBoutonDown" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="20474" binding="panelBoutonDown" layout-manager="GridLayoutManager" row-count="1" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -70,7 +62,7 @@
         <children>
           <component id="93c71" class="javax.swing.JButton" binding="ajouterUnMembreDButton" default-binding="true">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Ajouter un membre d'équipage"/>
@@ -78,7 +70,7 @@
           </component>
           <component id="8f990" class="javax.swing.JButton" binding="supprimerUnMembreEquipageButton" default-binding="true">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Supprimer un membre equipage"/>
@@ -86,28 +78,38 @@
           </component>
           <component id="4f77" class="javax.swing.JButton" binding="supprimerUnTypeAvionButton" default-binding="true">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
+              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Supprimer un Type Avion"/>
             </properties>
           </component>
-          <component id="11268" class="javax.swing.JButton" binding="créerUnAvionButton" default-binding="true">
+          <component id="8da5f" class="javax.swing.JButton" binding="qualifierUnMembreDButton" default-binding="true">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Créer un avion"/>
+              <text value="Qualifier un membre d'equipage"/>
             </properties>
           </component>
-          <component id="47c8c" class="javax.swing.JButton" binding="supprimerAvionButton" default-binding="true">
+          <component id="ea677" class="javax.swing.JButton" binding="créerTypeAvionButton" default-binding="true">
             <constraints>
-              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="5" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Supprimer avion"/>
+              <text value="Créer Type Avion"/>
             </properties>
           </component>
+          <hspacer id="c25e8">
+            <constraints>
+              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="a2716">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
         </children>
       </grid>
       <grid id="d3d8d" binding="panelMain" layout-manager="CardLayout" hgap="0" vgap="0">
@@ -122,9 +124,44 @@
               <card name="CreationTypeAvion"/>
             </constraints>
           </nested-form>
-          <nested-form id="88d27" form-file="Vue/FormulaireAdmin/SupprimerTypeAvion.form">
+          <nested-form id="88d27" form-file="Vue/FormulaireAdmin/SupprimerTypeAvion.form" binding="panelSupTypeAvion">
             <constraints>
-              <card name="Card1"/>
+              <card name="SupprimerTypeAvion"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="9c998" form-file="Vue/FormulaireAdmin/CreerAvion.form" binding="panelCreerAvion">
+            <constraints>
+              <card name="CreerAvion"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="7a907" form-file="Vue/FormulaireAdmin/SupprimerAvion.form" binding="panelSupAvion">
+            <constraints>
+              <card name="SuppresionAvion"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="9d163" form-file="Vue/FormulaireAdmin/AddMembreEquipage.form" binding="panelAddMembreEquipage">
+            <constraints>
+              <card name="AddMembreEquipage"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="f9a49" form-file="Vue/FormulaireAdmin/SupprimerMembreEquipage.form" binding="panelSupMemEquip">
+            <constraints>
+              <card name="SupMemEquip"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="950f6" form-file="Vue/FormulaireAdmin/QualificationMembreEquipage.form" binding="panelQualification">
+            <constraints>
+              <card name="Qualif"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="6dbf" form-file="Vue/FormulaireAdmin/CreerVol.form" binding="panelCreerVol">
+            <constraints>
+              <card name="CreerVol"/>
+            </constraints>
+          </nested-form>
+          <nested-form id="56bb3" form-file="Vue/FormulaireAdmin/SupprimeVol.form" binding="panelSupVol">
+            <constraints>
+              <card name="SupVol"/>
             </constraints>
           </nested-form>
         </children>

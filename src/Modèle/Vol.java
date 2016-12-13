@@ -27,6 +27,9 @@ public class Vol {
         this.numeroDeVol = num;
         this.date = dep;
     }
+    public String toString(){
+        return numeroDeVol;
+    }
     public void addPilote(Pilote pilote) throws EquipageException{
         if(pilote.peutVoler(avion.getTypeAvion())) {
             if (equipage.pilotIsSet()) {

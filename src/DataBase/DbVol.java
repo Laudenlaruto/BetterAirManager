@@ -18,15 +18,15 @@ public class DbVol extends Database {
     public void addVol(Vol vol){
         try {
             Statement stt = con.createStatement();
-            String query = "insert into vol values (?, ?, ?, ?, ?, ?)";
+            String query = "insert into vol values (?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, vol.getNumeroDeVol());
             preparedStmt.setString (2, vol.getSite());
             preparedStmt.setString (3, vol.getDestination());
             preparedStmt.setDate(4, vol.getDate());
             preparedStmt.setString(5,vol.getAvion().getRef());
-            preparedStmt.setString(6,vol.getNumeroDeVol());
             preparedStmt.execute();
+            DBEquipage.addEquipage(vol.getEquipage());
         } catch (SQLException e) {
             e.printStackTrace();
         }

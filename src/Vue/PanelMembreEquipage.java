@@ -23,8 +23,6 @@ public class PanelMembreEquipage extends JPanel {
     private JTable tableMembreEquipage;
     private TableauVols tableauVols;
     public PanelMembreEquipage() {
-        tableauVols = new TableauVols("PanelMembreEquipage");
-
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("NumVol");
         defaultTableModel.addColumn("Site");
@@ -55,5 +53,8 @@ public class PanelMembreEquipage extends JPanel {
 
 
         });
+    }
+
+    public void update() {tableauVols = new TableauVols("PanelMembreEquipage");
     }
 }

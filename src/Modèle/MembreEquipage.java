@@ -43,7 +43,18 @@ public abstract class MembreEquipage {
             return false;
         }
     }
-
+    public boolean isQualified(Avion avion){
+        if (qualification.size()==0){
+            return false;
+        }
+        if (qualification.size()==1){
+            return (qualification.get(0).getNom().equals(avion.getTypeAvion().getNom()));
+        }
+        if (qualification.size()==2){
+            return (qualification.get(0).getNom().equals(avion.getTypeAvion().getNom()) || qualification.get(1).getNom().equals(avion.getTypeAvion().getNom()));
+        }
+        return false;
+    }
     public String getNom() {return nom;}
     public String getPrenom() {
         return prenom;

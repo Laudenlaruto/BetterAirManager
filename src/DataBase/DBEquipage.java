@@ -17,7 +17,7 @@ public class DBEquipage extends Database {
     public DBEquipage() {
         super();
     }
-    public void addEquipage(Equipage equipage){
+    public static void addEquipage(Equipage equipage){
         try {
             Statement stt = con.createStatement();
             String query = "insert into equipage values (?, ?, ?)";

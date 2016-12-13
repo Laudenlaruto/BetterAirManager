@@ -67,9 +67,6 @@ public class DBTypeAvion extends Database {
             while (res.next()) {
                 statement += res.getString("Nom") + " " + res.getString("nbPNCmin") +"\n";
             }
-            System.out.println("");
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,7 +79,7 @@ public class DBTypeAvion extends Database {
             String query = "DELETE FROM typeavion WHERE nom = ? ";
             PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, typeAvion.getNom());
-
+            preparedStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

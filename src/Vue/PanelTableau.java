@@ -12,10 +12,14 @@ public class PanelTableau extends JPanel{
     private JPanel panelTableau;
     private JTable table1;
     private JScrollPane scrollPane;
-
+    private TableauVols tableauVols;
 
     public PanelTableau(){
-        TableauVols tableauVols = new TableauVols("Table de vols");
+
+    }
+
+    public void update() {
+        tableauVols = new TableauVols("Panel Tableau");
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("NumVol");
         defaultTableModel.addColumn("Site");
@@ -95,5 +99,4 @@ public class PanelTableau extends JPanel{
         table1 = new JTable(defaultTableModel);
         this.scrollPane.getViewport().add(table1);
     }
-
 }

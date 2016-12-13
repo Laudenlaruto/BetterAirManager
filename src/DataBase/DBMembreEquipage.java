@@ -2,10 +2,7 @@ package DataBase;
 
 import Modèle.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -18,17 +15,22 @@ public class DBMembreEquipage extends Database {
     public void addMembreEquipage(MembreEquipage membreEquipage){
         try {
             Statement stt = con.createStatement();
-            String query = "insert into membreequipage values (?, ?, ?, ?,? )";
+            String query = "insert into membreequipage values (?, ?, ?, ?, ? )";
             PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, membreEquipage.getNom());
             preparedStmt.setString (2,membreEquipage.getPrenom());
             preparedStmt.setString (3, membreEquipage.getMetier().toString());
-            if(membreEquipage.getQualification().size()==1){
-                preparedStmt.setString(4,membreEquipage.getQualification().get(0).getNom());
-                if(membreEquipage.getQualification().size()==2){
-                    preparedStmt.setString(4,membreEquipage.getQualification().get(1).getNom());
-                }
+            if(membreEquipage.getQualification().size()==1) {
+                preparedStmt.setString(4, membreEquipage.getQualification().get(0).getNom());
+            }else {
+                preparedStmt.setNull(4, Types.VARCHAR);
             }
+            if(membreEquipage.getQualification().size()==2){
+                preparedStmt.setString(5,membreEquipage.getQualification().get(1).getNom());
+            }else {
+                preparedStmt.setNull(5, Types.VARCHAR);
+            }
+
             preparedStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -153,39 +155,6 @@ public class DBMembreEquipage extends Database {
 
         return vols;
     }
-    public  static  PNC findMembreEquipagePNCByNom(String nom){
-        PNC pnc;
-        try {
-            Statement stt = con.createStatement();
-            ResultSet res = stt.executeQuery("SELECT * FROM assocpncequipage WHERE Nom ='"+ nom+"'");
-            while (res.next()) {
-                Statement stt2 = con.createStatement();
-                ResultSet res2 = stt2.executeQuery("SELECT * FROM membreequipage WHERE Nom ='"+ res.getString("nompnc")+"'");
-                res2.next();
-
-                pnc = new PNC(res2.getString("Nom"),res2.getString("Prenom"));
-                res2.getString("qualif1");
-                if(!res2.wasNull()){
-                    pnc.addQualification(DBTypeAvion.findTypeAvion(res2.getString("qualif1")));
-                }
-                res2.getString("qualif2");
-                if(!res2.wasNull()){
-                    pnc.addQualification(DBTypeAvion.findTypeAvion(res2.getString("qualif2")));
-                }
-
-                return pnc;
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (EquipageException e) {
-            e.printStackTrace();
-        } catch (InvariantBroken invariantBroken) {
-            invariantBroken.printStackTrace();
-        }
-        return null;
-    }
     public static ArrayList<PNC> findMembreEquipagePNC(String numeroDeVol) {
         ArrayList<PNC> pncs = new ArrayList<PNC>();
         try {
@@ -221,8 +190,22 @@ public class DBMembreEquipage extends Database {
         return pncs;
 
     }
+    public static void deleteMembreEquipage(MembreEquipage membreEquipage){
+        try {
+            String query = "DELETE FROM membreequipage WHERE Nom = ? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString (1, membreEquipage.getNom());
+            preparedStmt.executeUpdate();
 
+            String query2 = "DELETE FROM assocpncequipage WHERE nompnc = ? ";
+            PreparedStatement preparedStmt2 = con.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt2.setString (1, membreEquipage.getNom());
+            preparedStmt2.executeUpdate();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public static CoPilote findMembreEquipageCoPilot(String nom) {
         CoPilote coPilote;
         try {
@@ -250,25 +233,36 @@ public class DBMembreEquipage extends Database {
         return null;
 
     }
-
-    public void addQualification(TypeAvion typeAvion, MembreEquipage membreEquipage) {
+    public void addQualification(MembreEquipage membreEquipage) {
         try {
             Statement stt = con.createStatement();
             ResultSet res = stt.executeQuery("SELECT * FROM membreequipage WHERE Nom ='"+membreEquipage.getNom()+"'");
             res.next();
-            res.getString("qualif1");
-            if(res.wasNull()){
+            if(membreEquipage.getQualification().size()>=1) {
                 String querry = "UPDATE membreequipage SET qualif1 = ? WHERE Nom = ?";
                 PreparedStatement preparedStmt = con.prepareStatement(querry);
-                preparedStmt.setString (1, typeAvion.getNom());
-                preparedStmt.setString(2,membreEquipage.getNom());
+                preparedStmt.setString(1, membreEquipage.getQualification().get(0).getNom());
+                preparedStmt.setString(2, membreEquipage.getNom());
                 preparedStmt.executeUpdate();
-            }else {
-                String querry = "UPDATE membreequipage SET qualif2 = ? WHERE Nom = ?";
+            }
+            if(membreEquipage.getQualification().size()==2) {
+                String querry2 = "UPDATE membreequipage SET qualif2 = ? WHERE Nom = ?";
+                PreparedStatement preparedStmt2 = con.prepareStatement(querry2);
+                preparedStmt2.setString(1, membreEquipage.getQualification().get(1).getNom());
+                preparedStmt2.setString(2, membreEquipage.getNom());
+                preparedStmt2.executeUpdate();
+            }
+            if(membreEquipage.getQualification().size()==0){
+                String querry = "UPDATE membreequipage SET qualif1 = ? WHERE Nom = ?";
                 PreparedStatement preparedStmt = con.prepareStatement(querry);
-                preparedStmt.setString (1, typeAvion.getNom());
-                preparedStmt.setString(2,membreEquipage.getNom());
+                preparedStmt.setNull(1,Types.VARCHAR);
+                preparedStmt.setString(2, membreEquipage.getNom());
                 preparedStmt.executeUpdate();
+                String querry2 = "UPDATE membreequipage SET qualif2 = ? WHERE Nom = ?";
+                PreparedStatement preparedStmt2 = con.prepareStatement(querry2);
+                preparedStmt2.setNull(1,Types.VARCHAR);
+                preparedStmt2.setString(2, membreEquipage.getNom());
+                preparedStmt2.executeUpdate();
             }
 
 

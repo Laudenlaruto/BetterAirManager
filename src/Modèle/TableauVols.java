@@ -68,20 +68,15 @@ public class TableauVols {
     public void addMembreEquipageAEquipage(MembreEquipage membreEquipage,Equipage equipage){
         dbEquipage.addMembreEquiageAEquipage(membreEquipage, equipage);
     }
+    public void deleteMembreEquipage(MembreEquipage membreEquipage){
+        dbMembreEquipage.deleteMembreEquipage(membreEquipage);
+    }
     public void deleteMembreEquipageAEquipage(MembreEquipage membreEquipage,Equipage equipage){
 
         dbEquipage.deleteMembreEquipageAEquipage(membreEquipage, equipage);
     }
-    public void addQualification(TypeAvion typeAvion, MembreEquipage membreEquipage){
-        try {
-            membreEquipage.addQualification(typeAvion);
-            dbMembreEquipage.addQualification(typeAvion, membreEquipage);
-        } catch (EquipageException e) {
-            e.printStackTrace();
-        } catch (InvariantBroken invariantBroken) {
-            invariantBroken.printStackTrace();
-        }
-
+    public void addQualification(MembreEquipage membreEquipage){
+            dbMembreEquipage.addQualification(membreEquipage);
     }
 
     public ArrayList<Avion> getTableauAvion() {

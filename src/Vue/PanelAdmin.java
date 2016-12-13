@@ -1,5 +1,7 @@
 package Vue;
 
+import Vue.FormulaireAdmin.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +14,6 @@ public class PanelAdmin extends JPanel{
     private JButton créerUnVolButton;
     private JButton supprimerUnVolButton;
     private JButton créerTypeAvionButton;
-    private JButton créerUnVolButton1;
     private JButton qualifierUnMembreDButton;
     private JButton ajouterUnMembreDButton;
     private JButton supprimerUnMembreEquipageButton;
@@ -23,6 +24,14 @@ public class PanelAdmin extends JPanel{
     private JPanel panelBoutonUp;
     private JPanel panelBoutonDown;
     private JPanel panelMain;
+    private SupprimerTypeAvion panelSupTypeAvion;
+    private CreerAvion panelCreerAvion;
+    private SupprimerAvion panelSupAvion;
+    private AddMembreEquipage panelAddMembreEquipage;
+    private SupprimerMembreEquipage panelSupMemEquip;
+    private QualificationMembreEquipage panelQualification;
+    private CreerVol panelCreerVol;
+    private SupprimeVol panelSupVol;
 
     public PanelAdmin() {
         CardLayout card =(CardLayout)panelMain.getLayout();
@@ -30,6 +39,62 @@ public class PanelAdmin extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 card.show(panelMain,"CreationTypeAvion");
+            }
+        });
+        supprimerUnTypeAvionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelSupTypeAvion.updateBox();
+                card.show(panelMain,"SupprimerTypeAvion");
+            }
+        });
+        créerUnAvionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelCreerAvion.updateBox();
+                card.show(panelMain,"CreerAvion");
+            }
+        });
+        supprimerAvionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelSupAvion.updateBox();
+                card.show(panelMain,"SuppresionAvion");
+            }
+        });
+        ajouterUnMembreDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelAddMembreEquipage.update();
+                card.show(panelMain,"AddMembreEquipage");
+            }
+        });
+        supprimerUnMembreEquipageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelSupMemEquip.update();
+                card.show(panelMain,"SupMemEquip");
+            }
+        });
+        qualifierUnMembreDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelQualification.update();
+                card.show(panelMain,"Qualif");
+            }
+        });
+        créerUnVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelCreerVol.update();
+                card.show(panelMain,"CreerVol");
+            }
+        });
+        supprimerUnVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelSupVol.update();
+                card.show(panelMain,"SupVol");
             }
         });
     }

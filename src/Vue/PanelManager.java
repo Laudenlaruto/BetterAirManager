@@ -6,9 +6,10 @@ import javax.swing.*;
  * Created by ben_s on 12/12/2016.
  */
 public class PanelManager extends JPanel{
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton ajouterMembreDÉquipageButton;
+    private JButton retirerUnMembreDButton;
+    private JButton afficherVolButton;
     private JPanel panelManager;
     private JPanel panelGestionManager;
+    private JPanel panelCardManager;
 }

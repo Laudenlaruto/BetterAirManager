@@ -1,5 +1,6 @@
 package Vue.FormulaireAdmin;
 
+import Modèle.Avion;
 import Modèle.TableauVols;
 import Modèle.TypeAvion;
 
@@ -7,28 +8,29 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by ben_s on 12/12/2016.
+ * Created by Titan on 12/12/2016.
  */
-public class SupprimerTypeAvion extends JPanel {
-    private JComboBox comboBoxTypeAvion;
-    private JButton supprimerTypeAvionButton;
-    private JPanel panelSuppresionTypeAvion;
+public class CreerAvion extends JPanel{
+    private JComboBox comboBoxCreerAvion;
+    private JTextField textFieldRef;
+    private JPanel panelCreerAvion;
+    private JLabel labelTypeAvion;
+    private JLabel labelRef;
+    private JButton buttonCreerAvion;
     private TableauVols tableauVols;
-    public SupprimerTypeAvion() {
-        supprimerTypeAvionButton.addActionListener(new ActionListener() {
+    public CreerAvion() {
+
+        buttonCreerAvion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TypeAvion typeAvion = (TypeAvion) comboBoxTypeAvion.getSelectedItem();
-                comboBoxTypeAvion.removeItem(typeAvion);
-                tableauVols.deleteTypeAvion(typeAvion);
-
+                TypeAvion typeAvion = (TypeAvion)comboBoxCreerAvion.getSelectedItem();
+                Avion avion = new Avion(typeAvion,textFieldRef.getText());
+                tableauVols.addAvion(avion);
+                textFieldRef.setText("");
             }
         });
-
-
     }
 
     public void updateBox() {
@@ -38,7 +40,6 @@ public class SupprimerTypeAvion extends JPanel {
         for (int i = 0; i < tabTypeAvion.size(); i++) {
             def.addElement(tabTypeAvion.get(i));
         }
-        comboBoxTypeAvion.setModel(def);
-
+        comboBoxCreerAvion.setModel(def);
     }
 }

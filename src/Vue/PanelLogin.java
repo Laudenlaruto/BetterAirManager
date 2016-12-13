@@ -20,20 +20,21 @@ public class PanelLogin extends JFrame{
     private JPanel interfaceBouton;
     private JPanel TitleName;
     private JPanel panelInterface;
+    private PanelTableau panelTab;
+    private PanelAdmin panelAdmin;
+    private PanelMembreEquipage panelMbEq;
+    private PanelManager panelManager;
     private static TableauVols tableauVols;
     public PanelLogin(){
-        setSize(new Dimension(1000,700));
+        setSize(new Dimension(1100,700));
         setContentPane(panelMain);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         CardLayout card =(CardLayout)panelInterface.getLayout();
-        tableauVols = new TableauVols("Tableau De Vols");
-
-
         afficherTableauButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                panelTab.update();
                 card.show(panelInterface,"PanelTab");
             }
         });
@@ -52,6 +53,7 @@ public class PanelLogin extends JFrame{
         membreEquipageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                panelMbEq.update();
                 card.show(panelInterface,"PanelMembreEquipage");
             }
         });
