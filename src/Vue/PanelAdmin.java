@@ -50,7 +50,7 @@ public class PanelAdmin extends JFrame{
         supprimerUnTypeAvionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelSupTypeAvion.updateBox();
+                panelSupTypeAvion.update();
                 card.show(panelMain,"SupprimerTypeAvion");
             }
         });

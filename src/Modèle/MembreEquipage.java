@@ -35,13 +35,19 @@ public abstract class MembreEquipage {
             return true;
         }
     }
-    public boolean delQualification(TypeAvion typeAvion, boolean fromType){
-        if(fromType){
-            qualification.remove(typeAvion);
-            return true;
-        }else {
+    public boolean isQualified(TypeAvion typeAvion){
+
+        if (qualification.size()==0){
             return false;
         }
+        if (qualification.size()==1){
+            return (qualification.get(0).getNom().equals(typeAvion.getNom()));
+        }
+        if (qualification.size()==2){
+
+            return (qualification.get(0).getNom().equals(typeAvion.getNom()) || qualification.get(1).getNom().equals(typeAvion.getNom()));
+        }
+        return false;
     }
     public boolean isQualified(Avion avion){
         if (qualification.size()==0){

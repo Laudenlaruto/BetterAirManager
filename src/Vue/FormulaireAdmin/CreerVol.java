@@ -33,6 +33,8 @@ public class CreerVol extends JPanel {
     private JButton addPNCButton;
     private JScrollPane scrollPNC;
     private JLabel labelError;
+    private JLabel labelPNCmin;
+    private JLabel labelPNCmax;
     private TableauVols tableauVols;
     Aeroports aeroport;
     private int Annee = 2017;
@@ -69,7 +71,7 @@ public class CreerVol extends JPanel {
         creerVolButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                labelError.setText("");
+
                 if(!textFieldNumeroDeVol.getText().equals("") && pncs.size()!=0){
                     String date ="";
                     date+=comboBoxAnnee.getSelectedItem();
@@ -95,6 +97,7 @@ public class CreerVol extends JPanel {
                     vol.setEquipage(equipage);
                     tableauVols.addVol(vol);
                     update();
+                    labelError.setText("Vol créer");
                 }else {
                     System.out.println("Erreur dans la création de vol");
                 }
@@ -126,24 +129,33 @@ public class CreerVol extends JPanel {
                 comboBoxPNC.setModel(defPNC);
                 comboBoxPilot.setModel(defPilot);
                 comboBoxCopilot.setModel(defCoPilot);
-        }
+                Avion avionSelected = (Avion)comboBoxAvion.getSelectedItem();
+                labelPNCmin.setText(avionSelected.getTypeAvion().getNbPNCmin()+"");
+                labelPNCmax.setText(avionSelected.getTypeAvion().getNbPNCmax()+"");
+
+            }
         });
         addPNCButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Avion avion =(Avion)comboBoxAvion.getSelectedItem();
                 TypeAvion typeAvion = avion.getTypeAvion();
-                if (pncs.size()<typeAvion.getNbPNCmax()){
-                    pncs.add((PNC)comboBoxPNC.getSelectedItem());
-                    Object[] objs ={
-                            pncs.get(pncs.size()-1).getNom(),
-                            pncs.get(pncs.size()-1).getPrenom(),
-                    };
-                    defaultTableModel.addRow(objs);
-                    comboBoxPNC.removeItem(pncs.get(pncs.size()-1));
+                if(comboBoxPNC.getSelectedItem() !=null){
+                    if (pncs.size()<typeAvion.getNbPNCmax()){
+                        pncs.add((PNC)comboBoxPNC.getSelectedItem());
+                        Object[] objs ={
+                                pncs.get(pncs.size()-1).getNom(),
+                                pncs.get(pncs.size()-1).getPrenom(),
+                        };
+                        defaultTableModel.addRow(objs);
+                        comboBoxPNC.removeItem(pncs.get(pncs.size()-1));
+                    }else{
+                        labelError.setText("Vol Complet");
+                    }
                 }else{
-                    labelError.setText("Vol Complet");
+                    labelError.setText("Plus de personne qualifier pour ce vol");
                 }
+
 
             }
         });
@@ -183,7 +195,9 @@ public class CreerVol extends JPanel {
         comboBoxPNC.setModel(defPNC);
         comboBoxPilot.setModel(defPilot);
         comboBoxCopilot.setModel(defCoPilot);
-
+        Avion avionSelected = (Avion)comboBoxAvion.getSelectedItem();
+        labelPNCmin.setText(avionSelected.getTypeAvion().getNbPNCmin()+"");
+        labelPNCmax.setText(avionSelected.getTypeAvion().getNbPNCmax()+"");
 
 
 

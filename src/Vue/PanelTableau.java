@@ -16,7 +16,7 @@ public class PanelTableau extends JFrame{
     private TableauVols tableauVols;
 
     public PanelTableau(){
-        setSize(new Dimension(1200,600));
+        setSize(new Dimension(800,600));
         setContentPane(panelTableau);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

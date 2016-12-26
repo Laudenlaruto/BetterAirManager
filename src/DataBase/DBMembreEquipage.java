@@ -155,6 +155,25 @@ public class DBMembreEquipage extends Database {
 
         return vols;
     }
+    public static boolean membreEquipageActife(String nom){
+        Statement stt = null;
+        Statement stt2 = null;
+        Statement stt3 = null;
+        try {
+            stt = con.createStatement();
+            stt2 = con.createStatement();
+            stt3 = con.createStatement();
+            ResultSet res = stt.executeQuery("SELECT * FROM assocpncequipage WHERE nompnc ='" + nom+"'");
+            ResultSet res2 = stt2.executeQuery("SELECT * FROM equipage WHERE Pilot ='" + nom+"'");
+            ResultSet res3 = stt3.executeQuery("SELECT * FROM equipage WHERE Copilot ='" + nom+"'");
+            if(res.next() || res2.next() || res3.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    return false;
+    }
     public static ArrayList<PNC> findMembreEquipagePNC(String numeroDeVol) {
         ArrayList<PNC> pncs = new ArrayList<PNC>();
         try {
@@ -178,7 +197,7 @@ public class DBMembreEquipage extends Database {
                 pncs.add(pnc);
 
             }
-
+            return pncs;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -187,7 +206,7 @@ public class DBMembreEquipage extends Database {
         } catch (InvariantBroken invariantBroken) {
             invariantBroken.printStackTrace();
         }
-        return pncs;
+        return null;
 
     }
     public static void deleteMembreEquipage(MembreEquipage membreEquipage){
@@ -212,17 +231,18 @@ public class DBMembreEquipage extends Database {
 
             Statement stt = con.createStatement();
             ResultSet res = stt.executeQuery("SELECT * FROM membreequipage WHERE Nom ='"+nom+"' AND Metier ='"+ TypeMembreEquipage.COPILOTE+"'");
-            res.next();
-            coPilote = new CoPilote(res.getString("Nom"), res.getString("Prenom"));
-            res.getString("qualif1");
-            if(!res.wasNull()){
-                coPilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif1")));
+            if(res.next()) {
+                coPilote = new CoPilote(res.getString("Nom"), res.getString("Prenom"));
+                res.getString("qualif1");
+                if (!res.wasNull()) {
+                    coPilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif1")));
+                }
+                res.getString("qualif2");
+                if (!res.wasNull()) {
+                    coPilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif2")));
+                }
+                return coPilote;
             }
-            res.getString("qualif2");
-            if(!res.wasNull()){
-                coPilote.addQualification(DBTypeAvion.findTypeAvion(res.getString("qualif2")));
-            }
-            return coPilote;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (EquipageException e) {

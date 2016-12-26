@@ -29,11 +29,14 @@ public class Vol {
         if(this.getEquipage().getCoPilote().getNom().equals(membreEquipage.getNom())){
             return true;
         }
-        for(int i =0;i < getEquipage().getPNC().size();i++){
-            if(getEquipage().getPNC().get(i).getNom().equals(membreEquipage.getNom())){
-                return true;
+        if(!getEquipage().PNCIsSet()){
+            for(int i =0;i < getEquipage().getPNC().size();i++){
+                if(getEquipage().getPNC().get(i).getNom().equals(membreEquipage.getNom())){
+                    return true;
+                }
             }
         }
+
         return false;
     }
     public Vol(String num, java.sql.Date dep){

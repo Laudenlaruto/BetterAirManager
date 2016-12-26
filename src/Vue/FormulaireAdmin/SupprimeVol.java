@@ -15,6 +15,7 @@ public class SupprimeVol extends JPanel{
     private JComboBox comboBoxSupVol;
     private JButton supprimerVolButton;
     private JPanel panelSupVol;
+    private JLabel labelError;
     private TableauVols tableauVols;
     public SupprimeVol() {
 
@@ -24,6 +25,7 @@ public class SupprimeVol extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 tableauVols.deleteVol((Vol)comboBoxSupVol.getSelectedItem());
                 comboBoxSupVol.removeItem(comboBoxSupVol.getSelectedItem());
+                labelError.setText("Supprimer");
             }
         });
     }

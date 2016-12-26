@@ -28,6 +28,21 @@ public class DeleteMembre extends JPanel {
                 comboBoxPNC.removeItem(membreEquipage);
             }
         });
+        comboBoxVol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultComboBoxModel<MembreEquipage> defPNC = new DefaultComboBoxModel<MembreEquipage>();
+                ArrayList<MembreEquipage> pncs = tableauVols.getTableauMembreEquipage();
+                for (int i= 0;i<pncs.size();i++){
+                    Vol vol = (Vol)comboBoxVol.getSelectedItem();
+                    MembreEquipage membreEquipage = pncs.get(i);
+                    if(pncs.get(i).getMetier().equals(TypeMembreEquipage.PNC) && pncs.get(i).isQualified((Vol)comboBoxVol.getSelectedItem())&& vol.membreEquipageInVol(membreEquipage) ){
+                        defPNC.addElement(pncs.get(i));
+                    }
+                }
+                comboBoxPNC.setModel(defPNC);
+            }
+        });
     }
 
     public void update() {

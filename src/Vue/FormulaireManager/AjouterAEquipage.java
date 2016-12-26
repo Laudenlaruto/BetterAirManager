@@ -22,15 +22,23 @@ public class AjouterAEquipage extends JPanel{
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                Vol vol = (Vol)comboBoxVol.getSelectedItem();
-                if(vol.getAvion().getTypeAvion().getNbPNCmax()>vol.getEquipage().getPNC().size()){
-                    vol.getEquipage().addPnc((PNC)comboBoxPNC.getSelectedItem());
-                    tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
-                    comboBoxPNC.removeItem(comboBoxPNC.getSelectedItem());
-                }else {
-                    labelError.setText("Vol Complet");
+                if(comboBoxPNC.getSelectedItem() !=null){
+                    Vol vol = (Vol)comboBoxVol.getSelectedItem();
+                    if(vol.equipageIsSet()){
+                        Equipage equipage = new Equipage(vol);
+                        vol.setEquipage(equipage);
+                    }
+                    if(vol.getAvion().getTypeAvion().getNbPNCmax()>vol.getEquipage().getPNC().size()){
+                        vol.getEquipage().addPnc((PNC)comboBoxPNC.getSelectedItem());
+                        tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
+                        comboBoxPNC.removeItem(comboBoxPNC.getSelectedItem());
+                    }else {
+                        labelError.setText("Vol Complet");
+                    }
+                }else{
+                    labelError.setText("Plus de PNC qualifier pour ce vol");
                 }
+
 
             }
         });
@@ -53,6 +61,7 @@ public class AjouterAEquipage extends JPanel{
     }
 
     public void update() {
+        labelError.setText("");
         tableauVols = new TableauVols("AjoutEquipage");
         ArrayList<Vol> vols = tableauVols.getTableauDeVols();
         ArrayList<MembreEquipage> pncs = tableauVols.getTableauMembreEquipage();
