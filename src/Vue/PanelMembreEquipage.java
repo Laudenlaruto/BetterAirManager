@@ -33,8 +33,10 @@ public class PanelMembreEquipage extends JFrame {
         defaultTableModel.addColumn("Date");
         defaultTableModel.addColumn("Ref Avion");
         defaultTableModel.addColumn("Type Avion");
+        defaultTableModel.addColumn("Vol Complet");
         defaultTableModel.setRowCount(0);
         ArrayList<Vol> vols = tableauVols.findVolByMembreEquipage(nom);
+
         for (int i =0; i<vols.size();i++){
             Object objs[] = {
                     vols.get(i).getNumeroDeVol(),
@@ -42,7 +44,8 @@ public class PanelMembreEquipage extends JFrame {
                     vols.get(i).getDestination(),
                     vols.get(i).getDate(),
                     vols.get(i).getAvion().getRef(),
-                    vols.get(i).getAvion().getTypeAvion().getNom()};
+                    vols.get(i).getAvion().getTypeAvion().getNom(),
+                    vols.get(i).equipagaAuComplet()};
             defaultTableModel.addRow(objs);
         }
         tableMembreEquipage = new JTable(defaultTableModel);

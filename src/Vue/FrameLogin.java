@@ -23,6 +23,8 @@ public class FrameLogin extends JFrame{
     private JTextField textFieldPassword;
     private JLabel titreLogin;
     private JButton connexionButton;
+    private JLabel labelError;
+    private JButton retourButton;
 
     public FrameLogin(String id){
         setSize(new Dimension(400,300));
@@ -38,11 +40,17 @@ public class FrameLogin extends JFrame{
                         dispose();
                         new PanelAdmin().setVisible(true);
                     }
+                    else {
+                        labelError.setText("Username ou password erroné");
+                    }
                 }
                 else if(id.equals("Manager")){
                     if(textFieldUser.getText().equals("manager")&&textFieldPassword.getText().equals("manager")){
                         dispose();
                         new PanelManager().setVisible(true);
+                    }
+                    else {
+                        labelError.setText("Username ou password erroné");
                     }
                 }
                 else if(id.equals("Equipage")){
@@ -53,10 +61,20 @@ public class FrameLogin extends JFrame{
                             dispose();
                             new PanelMembreEquipage(textFieldUser.getText()).setVisible(true);
                         }
+                        else {
+                            labelError.setText("Username ou password erroné");
+                        }
                     }
                 }
             }
         });
 
+        retourButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new PanelLogin().setVisible(true);
+            }
+        });
     }
 }

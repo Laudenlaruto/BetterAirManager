@@ -17,6 +17,18 @@ public class SupprimeVol extends JPanel{
     private JPanel panelSupVol;
     private TableauVols tableauVols;
     public SupprimeVol() {
+
+        update();
+        supprimerVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableauVols.deleteVol((Vol)comboBoxSupVol.getSelectedItem());
+                comboBoxSupVol.removeItem(comboBoxSupVol.getSelectedItem());
+            }
+        });
+    }
+
+    public void update() {
         tableauVols = new TableauVols("Sup Vol");
         ArrayList<Vol> vols = tableauVols.getTableauDeVols();
         DefaultComboBoxModel<Vol> defVol = new DefaultComboBoxModel();
@@ -24,16 +36,5 @@ public class SupprimeVol extends JPanel{
             defVol.addElement(vols.get(i));
             comboBoxSupVol.setModel(defVol);
         }
-        supprimerVolButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tableauVols.deleteVol((Vol)comboBoxSupVol.getSelectedItem());
-                comboBoxSupVol.removeItem((Vol)comboBoxSupVol.getSelectedItem());
-            }
-        });
-    }
-
-    public void update() {
-        tableauVols = new TableauVols("Sup Vol");
     }
 }

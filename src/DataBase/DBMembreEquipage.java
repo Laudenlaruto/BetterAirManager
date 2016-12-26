@@ -20,7 +20,7 @@ public class DBMembreEquipage extends Database {
             preparedStmt.setString (1, membreEquipage.getNom());
             preparedStmt.setString (2,membreEquipage.getPrenom());
             preparedStmt.setString (3, membreEquipage.getMetier().toString());
-            if(membreEquipage.getQualification().size()==1) {
+            if(membreEquipage.getQualification().size()>=1) {
                 preparedStmt.setString(4, membreEquipage.getQualification().get(0).getNom());
             }else {
                 preparedStmt.setNull(4, Types.VARCHAR);

@@ -71,8 +71,13 @@ public class Vol {
 
     }
     public boolean equipagaAuComplet(){
-        return (!equipage.pilotIsSet() && !equipage.coPilotIsSet() && equipage.getPNC().size()>=avion.getTypeAvion().getNbPNCmin() && equipage.getPNC().size()<=avion.getTypeAvion().getNbPNCmax());
+        if (!equipage.PNCIsSet()) {
+            return (!equipage.pilotIsSet() && !equipage.coPilotIsSet() && equipage.getPNC().size() >= avion.getTypeAvion().getNbPNCmin() && equipage.getPNC().size() <= avion.getTypeAvion().getNbPNCmax());
+        }else{
+            return false;
+        }
     }
+
 
     public String getNumeroDeVol() {
         return numeroDeVol;

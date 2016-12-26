@@ -13,6 +13,7 @@ public class AjouterAEquipage extends JPanel{
     private JComboBox comboBoxPNC;
     private JButton button1;
     private JPanel panelAjoutEquipage;
+    private JLabel labelError;
     private TableauVols tableauVols;
     public AjouterAEquipage() {
         update();
@@ -21,8 +22,32 @@ public class AjouterAEquipage extends JPanel{
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
-                comboBoxPNC.removeItem(comboBoxPNC.getSelectedItem());
+
+                Vol vol = (Vol)comboBoxVol.getSelectedItem();
+                if(vol.getAvion().getTypeAvion().getNbPNCmax()>vol.getEquipage().getPNC().size()){
+                    vol.getEquipage().addPnc((PNC)comboBoxPNC.getSelectedItem());
+                    tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
+                    comboBoxPNC.removeItem(comboBoxPNC.getSelectedItem());
+                }else {
+                    labelError.setText("Vol Complet");
+                }
+
+            }
+        });
+        comboBoxVol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labelError.setText("");
+                ArrayList<MembreEquipage> pncs = tableauVols.getTableauMembreEquipage();
+                DefaultComboBoxModel<MembreEquipage> defPNC = new DefaultComboBoxModel<MembreEquipage>();
+                for (int i= 0;i<pncs.size();i++){
+                    Vol vol = (Vol)comboBoxVol.getSelectedItem();
+                    MembreEquipage membreEquipage = pncs.get(i);
+                    if(pncs.get(i).getMetier().equals(TypeMembreEquipage.PNC) && pncs.get(i).isQualified((Vol)comboBoxVol.getSelectedItem())&& !vol.membreEquipageInVol(membreEquipage) ){
+                        defPNC.addElement(pncs.get(i));
+                    }
+                }
+                comboBoxPNC.setModel(defPNC);
             }
         });
     }

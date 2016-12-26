@@ -32,6 +32,7 @@ public class CreerVol extends JPanel {
     private JTable tablePNC;
     private JButton addPNCButton;
     private JScrollPane scrollPNC;
+    private JLabel labelError;
     private TableauVols tableauVols;
     Aeroports aeroport;
     private int Annee = 2017;
@@ -68,6 +69,7 @@ public class CreerVol extends JPanel {
         creerVolButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                labelError.setText("");
                 if(!textFieldNumeroDeVol.getText().equals("") && pncs.size()!=0){
                     String date ="";
                     date+=comboBoxAnnee.getSelectedItem();
@@ -101,6 +103,7 @@ public class CreerVol extends JPanel {
         comboBoxAvion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                labelError.setText("");
                 ArrayList<MembreEquipage> membreEquipages = tableauVols.getTableauMembreEquipage();
                 DefaultComboBoxModel<MembreEquipage> defPilot = new DefaultComboBoxModel<>();
                 DefaultComboBoxModel<MembreEquipage> defCoPilot = new DefaultComboBoxModel<>();
@@ -128,13 +131,20 @@ public class CreerVol extends JPanel {
         addPNCButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pncs.add((PNC)comboBoxPNC.getSelectedItem());
-                Object[] objs ={
-                pncs.get(pncs.size()-1).getNom(),
-                pncs.get(pncs.size()-1).getPrenom(),
-                };
-                defaultTableModel.addRow(objs);
-                comboBoxPNC.removeItem(pncs.get(pncs.size()-1));
+                Avion avion =(Avion)comboBoxAvion.getSelectedItem();
+                TypeAvion typeAvion = avion.getTypeAvion();
+                if (pncs.size()<typeAvion.getNbPNCmax()){
+                    pncs.add((PNC)comboBoxPNC.getSelectedItem());
+                    Object[] objs ={
+                            pncs.get(pncs.size()-1).getNom(),
+                            pncs.get(pncs.size()-1).getPrenom(),
+                    };
+                    defaultTableModel.addRow(objs);
+                    comboBoxPNC.removeItem(pncs.get(pncs.size()-1));
+                }else{
+                    labelError.setText("Vol Complet");
+                }
+
             }
         });
     }

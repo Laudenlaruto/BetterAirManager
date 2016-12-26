@@ -68,6 +68,7 @@ public class DbVol extends Database {
                     res.getString("dest"),
                     res.getDate("date"),
                     DBAvion.findAvion(res.getString("avion")));
+            vol.setEquipage(DBEquipage.findEquipage(vol));
             return vol;
         } catch (SQLException e) {
             e.printStackTrace();

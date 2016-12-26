@@ -163,11 +163,6 @@
         </constraints>
         <properties/>
       </component>
-      <vspacer id="ab5b9">
-        <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <scrollpane id="c852a" binding="scrollPNC">
         <constraints>
           <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -204,11 +199,14 @@
           <text value="Add PNC"/>
         </properties>
       </component>
-      <hspacer id="29d72">
+      <component id="1bc82" class="javax.swing.JLabel" binding="labelError">
         <constraints>
-          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
-      </hspacer>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

@@ -16,16 +16,17 @@ public class AfficherVol extends JPanel{
     private JTable tableVol;
     private JScrollPane scrollVol;
     private TableauVols tableauVols;
+    private DefaultTableModel defaultTableModel;
     public AfficherVol() {
         tableauVols = new TableauVols("Panel Tableau");
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("NumVol");
         defaultTableModel.addColumn("Site");
         defaultTableModel.addColumn("Destiniation");
         defaultTableModel.addColumn("Date");
         defaultTableModel.addColumn("Ref Avion");
         defaultTableModel.addColumn("Type Avion");
-
+        defaultTableModel.addColumn("Vol Complet");
 
         comboBoxVol.addActionListener(new ActionListener() {
             @Override
@@ -37,7 +38,8 @@ public class AfficherVol extends JPanel{
                         vol.getDestination(),
                         vol.getDate(),
                         vol.getAvion().getRef(),
-                        vol.getAvion().getTypeAvion().getNom()
+                        vol.getAvion().getTypeAvion().getNom(),
+                        vol.equipagaAuComplet()
                 };
                 defaultTableModel.setRowCount(0);
                 defaultTableModel.addRow(objs);
@@ -48,6 +50,7 @@ public class AfficherVol extends JPanel{
     }
 
     public void update() {
+        defaultTableModel.setRowCount(0);
         tableauVols = new TableauVols("AjoutEquipage");
         ArrayList<Vol> vols = tableauVols.getTableauDeVols();
         ArrayList<MembreEquipage> pncs = tableauVols.getTableauMembreEquipage();
@@ -55,5 +58,21 @@ public class AfficherVol extends JPanel{
         for(int i = 0;i<vols.size();i++){
             defVol.addElement(vols.get(i));
         }
-        comboBoxVol.setModel(defVol);}
+        comboBoxVol.setModel(defVol);
+        Vol vol = (Vol)comboBoxVol.getSelectedItem();
+        Object[] objs = {
+                vol.getNumeroDeVol(),
+                vol.getSite(),
+                vol.getDestination(),
+                vol.getDate(),
+                vol.getAvion().getRef(),
+                vol.getAvion().getTypeAvion().getNom(),
+                vol.equipagaAuComplet()
+        };
+        defaultTableModel.setRowCount(0);
+        defaultTableModel.addRow(objs);
+        tableVol = new JTable(defaultTableModel);
+        scrollVol.getViewport().add(tableVol);
+    }
+
 }

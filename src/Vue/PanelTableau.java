@@ -42,6 +42,7 @@ public class PanelTableau extends JFrame{
         defaultTableModel.addColumn("Nom");
         defaultTableModel.addColumn("Prenom");
         defaultTableModel.addColumn("Metier");
+        defaultTableModel.addColumn("Vol Complet");
 
         for(int i =0 ; i<tableauVols.getTableauDeVols().size();i++){
 
@@ -70,7 +71,8 @@ public class PanelTableau extends JFrame{
                                 tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom(),
                                 tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getNom(),
                                 tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getPrenom(),
-                                tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getMetier()
+                                tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getMetier(),
+                                tableauVols.getTableauDeVols().get(i).equipagaAuComplet()
                         };
                         defaultTableModel.addRow(objs);
 
@@ -85,7 +87,8 @@ public class PanelTableau extends JFrame{
                                 tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom(),
                                 tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getNom(),
                                 tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getPrenom(),
-                                tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getMetier()
+                                tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getMetier(),
+                                tableauVols.getTableauDeVols().get(i).equipagaAuComplet()
                         };
                         defaultTableModel.addRow(objs);
                     } else {
@@ -99,7 +102,8 @@ public class PanelTableau extends JFrame{
                                 tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom(),
                                 tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getNom(),
                                 tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getPrenom(),
-                                tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getMetier()};
+                                tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getMetier(),
+                                tableauVols.getTableauDeVols().get(i).equipagaAuComplet()};
                         defaultTableModel.addRow(objs);
 
                     }

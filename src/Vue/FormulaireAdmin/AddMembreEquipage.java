@@ -63,11 +63,13 @@ public class AddMembreEquipage extends JPanel {
                 }else{
                     PNC pnc = new PNC(textFieldNom.getText(),textFieldPrenom.getText());
                     if(!pasDeQualif1CheckBox.isSelected()){
+
                         pnc.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
                     }
                     if(!pasDeQualif2CheckBox.isSelected()){
                         pnc.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
                     }
+
                     tableauVols.addMembreEquipage(pnc);
                 }
                 } catch (EquipageException e1) {
