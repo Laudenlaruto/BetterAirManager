@@ -4,15 +4,30 @@ import Modèle.TableauVols;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelTableau extends JPanel{
+public class PanelTableau extends JFrame{
     private JPanel panelTableau;
     private JTable table1;
     private JScrollPane scrollPane;
+    private JButton buttonDeco;
     private TableauVols tableauVols;
 
     public PanelTableau(){
-
+        setSize(new Dimension(1200,600));
+        setContentPane(panelTableau);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    update();
+        buttonDeco.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new PanelLogin().setVisible(true);
+            }
+        });
     }
 
     public void update() {

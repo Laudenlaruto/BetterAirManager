@@ -15,13 +15,14 @@ public class AjouterAEquipage extends JPanel{
     private JPanel panelAjoutEquipage;
     private TableauVols tableauVols;
     public AjouterAEquipage() {
+        update();
         tableauVols = new TableauVols("AjoutEquipage");
 
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableauVols.addMembreEquipageAEquipage((MembreEquipage)comboBoxPNC.getSelectedItem(),(Vol)comboBoxVol.getSelectedItem());
-                comboBoxPNC.removeItem((MembreEquipage)comboBoxPNC.getSelectedItem());
+                comboBoxPNC.removeItem(comboBoxPNC.getSelectedItem());
             }
         });
     }

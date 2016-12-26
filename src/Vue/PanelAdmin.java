@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by ben_s on 12/12/2016.
  */
-public class PanelAdmin extends JPanel{
+public class PanelAdmin extends JFrame{
     private JButton créerUnVolButton;
     private JButton supprimerUnVolButton;
     private JButton créerTypeAvionButton;
@@ -32,8 +32,14 @@ public class PanelAdmin extends JPanel{
     private QualificationMembreEquipage panelQualification;
     private CreerVol panelCreerVol;
     private SupprimeVol panelSupVol;
+    private CreationTypeAvion panelCreationAvion;
+    private JButton deconnexionButton;
 
     public PanelAdmin() {
+        setSize(new Dimension(1200,600));
+        setContentPane(panelAdmin);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         CardLayout card =(CardLayout)panelMain.getLayout();
         créerTypeAvionButton.addActionListener(new ActionListener() {
             @Override
@@ -95,6 +101,13 @@ public class PanelAdmin extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 panelSupVol.update();
                 card.show(panelMain,"SupVol");
+            }
+        });
+        deconnexionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new PanelLogin().setVisible(true);
             }
         });
     }

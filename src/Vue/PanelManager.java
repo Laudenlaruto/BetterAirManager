@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelManager extends JPanel{
+public class PanelManager extends JFrame{
     private JButton ajouterMembreDÉquipageButton;
     private JButton retirerUnMembreDButton;
     private JButton afficherVolButton;
@@ -19,8 +19,13 @@ public class PanelManager extends JPanel{
     private AjouterAEquipage panelAjoutEquipage;
     private DeleteMembre panelSupMem;
     private AfficherVol panelVol;
+    private JButton buttonDeconnexion;
 
     public PanelManager() {
+        setSize(new Dimension(1200,600));
+        setContentPane(panelManager);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         CardLayout card =(CardLayout)panelCardManager.getLayout();
         ajouterMembreDÉquipageButton.addActionListener(new ActionListener() {
             @Override
@@ -41,6 +46,13 @@ public class PanelManager extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 panelVol.update();
                 card.show(panelCardManager,"AffVol");
+            }
+        });
+        buttonDeconnexion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new PanelLogin().setVisible(true);
             }
         });
     }
