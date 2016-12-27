@@ -102,4 +102,16 @@ public abstract class MembreEquipage {
         }
         return false;
     }
+
+    public boolean qualifierSurUnVol(TypeAvion typeAvion) {
+        TableauVols tableauVols = new TableauVols("VerifQualifSurUnVol");
+        System.out.println(getNom());
+        for (int i=0;i<tableauVols.getTableauDeVols().size();i++){
+                if(tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().isQualified(typeAvion) &&
+                        tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getNom().equals(this.getNom())){
+                    return true;
+                }
+        }
+        return false;
+    }
 }

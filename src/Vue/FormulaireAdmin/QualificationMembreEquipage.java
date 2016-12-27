@@ -19,6 +19,7 @@ public class QualificationMembreEquipage extends JPanel {
     private JButton qualifierButton;
     private JComboBox comboBoxQualif2;
     private JCheckBox pasDeQualif2CheckBox;
+    private JLabel labelError;
     private TableauVols tableauVols;
     public QualificationMembreEquipage() {
 
@@ -31,14 +32,24 @@ public class QualificationMembreEquipage extends JPanel {
                 ArrayList<TypeAvion> typeAvions = new ArrayList<TypeAvion>();
 
                 if (!pasDeQualif1CheckBox.isSelected()) {
-                    typeAvions.add((TypeAvion) comboBoxQualif1.getModel().getSelectedItem());
-                    comboBoxQualif1.getModel().setSelectedItem((TypeAvion) comboBoxQualif1.getModel().getSelectedItem());
+                    if(!membreEquipage.qualifierSurUnVol((TypeAvion)comboBoxQualif1.getSelectedItem())){
+                        typeAvions.add((TypeAvion) comboBoxQualif1.getModel().getSelectedItem());
+                        comboBoxQualif1.getModel().setSelectedItem(comboBoxQualif1.getModel().getSelectedItem());
+                    }else {
+                        labelError.setText("Qualif 1 Membre equipage qualifier sur un un vol de ce type");
+                    }
+
                 }else {
                     comboBoxQualif1.getModel().setSelectedItem(null);
                 }
                 if (!pasDeQualif2CheckBox.isSelected()) {
-                    typeAvions.add((TypeAvion) comboBoxQualif2.getModel().getSelectedItem());
-                    comboBoxQualif2.getModel().setSelectedItem((TypeAvion) comboBoxQualif2.getModel().getSelectedItem());
+                    if(!membreEquipage.qualifierSurUnVol((TypeAvion)comboBoxQualif2.getSelectedItem())) {
+                        typeAvions.add((TypeAvion) comboBoxQualif2.getModel().getSelectedItem());
+                        comboBoxQualif2.getModel().setSelectedItem(comboBoxQualif2.getModel().getSelectedItem());
+                    }
+                    else {
+                        labelError.setText("Qualif 2 Membre equipage qualifier sur un un vol de ce type");
+                    }
                 }else {
                     comboBoxQualif2.getModel().setSelectedItem(null);
                 }
@@ -58,7 +69,6 @@ public class QualificationMembreEquipage extends JPanel {
                     pasDeQualif2CheckBox.setSelected(true);
                 }
                 else if(membreEquipage.getQualification().size()==1) {
-                    System.out.println(membreEquipage.getQualification().get(0));
                     comboBoxQualif1.getModel().setSelectedItem(membreEquipage.getQualification().get(0));
                     comboBoxQualif2.getModel().setSelectedItem(null);
                     pasDeQualif1CheckBox.setSelected(false);
@@ -70,6 +80,18 @@ public class QualificationMembreEquipage extends JPanel {
                     comboBoxQualif2.getModel().setSelectedItem(membreEquipage.getQualification().get(1));
                     pasDeQualif2CheckBox.setSelected(false);
                 }
+            }
+        });
+        comboBoxQualif1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labelError.setText("");
+            }
+        });
+        comboBoxQualif2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labelError.setText("");
             }
         });
     }

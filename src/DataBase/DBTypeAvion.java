@@ -22,7 +22,6 @@ public class DBTypeAvion extends Database {
                 TypeAvion typeAvion = new TypeAvion(res.getString("Nom"),res.getInt("nbPNCmin"),res.getInt("nbPNCmax"));
                 typeAvions.add(typeAvion);
             }
-            System.out.println("");
 
 
         } catch (SQLException e) {
@@ -48,7 +47,7 @@ public class DBTypeAvion extends Database {
         try {
             Statement stt = con.createStatement();
            String querry = "INSERT into typeavion VALUES (?, ?, ?)";
-            PreparedStatement preparedStmt = this.con.prepareStatement(querry);
+            PreparedStatement preparedStmt = con.prepareStatement(querry);
             preparedStmt.setString (1, typeAvion.getNom());
             preparedStmt.setInt    (2, typeAvion.getNbPNCmin());
             preparedStmt.setInt    (3, typeAvion.getNbPNCmax());
