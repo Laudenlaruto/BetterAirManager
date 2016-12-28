@@ -105,12 +105,25 @@ public abstract class MembreEquipage {
 
     public boolean qualifierSurUnVol(TypeAvion typeAvion) {
         TableauVols tableauVols = new TableauVols("VerifQualifSurUnVol");
-        System.out.println(getNom());
         for (int i=0;i<tableauVols.getTableauDeVols().size();i++){
-                if(tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().isQualified(typeAvion) &&
-                        tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getNom().equals(this.getNom())){
+                if(tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
+                        tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
+                        tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
                     return true;
                 }
+            if(tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
+                    tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
+                    tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
+                return true;
+            }
+            for (int j=0;j<tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().size();j++){
+                if(tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
+                        tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
+                        tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
+                    return true;
+                }
+            }
+
         }
         return false;
     }

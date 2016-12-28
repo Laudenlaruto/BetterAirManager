@@ -258,12 +258,18 @@ public class DBMembreEquipage extends Database {
             Statement stt = con.createStatement();
             ResultSet res = stt.executeQuery("SELECT * FROM membreequipage WHERE Nom ='"+membreEquipage.getNom()+"'");
             res.next();
+
             if(membreEquipage.getQualification().size()>=1) {
                 String querry = "UPDATE membreequipage SET qualif1 = ? WHERE Nom = ?";
                 PreparedStatement preparedStmt = con.prepareStatement(querry);
                 preparedStmt.setString(1, membreEquipage.getQualification().get(0).getNom());
                 preparedStmt.setString(2, membreEquipage.getNom());
                 preparedStmt.executeUpdate();
+                String querry2 = "UPDATE membreequipage SET qualif2 = ? WHERE Nom = ?";
+                PreparedStatement preparedStmt2 = con.prepareStatement(querry2);
+                preparedStmt2.setNull(1,Types.VARCHAR);
+                preparedStmt2.setString(2, membreEquipage.getNom());
+                preparedStmt2.executeUpdate();
             }
             if(membreEquipage.getQualification().size()==2) {
                 String querry2 = "UPDATE membreequipage SET qualif2 = ? WHERE Nom = ?";

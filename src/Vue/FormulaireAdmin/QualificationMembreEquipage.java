@@ -19,7 +19,8 @@ public class QualificationMembreEquipage extends JPanel {
     private JButton qualifierButton;
     private JComboBox comboBoxQualif2;
     private JCheckBox pasDeQualif2CheckBox;
-    private JLabel labelError;
+    private JLabel labelError1;
+    private JLabel labelError2;
     private TableauVols tableauVols;
     public QualificationMembreEquipage() {
 
@@ -31,30 +32,43 @@ public class QualificationMembreEquipage extends JPanel {
                 MembreEquipage membreEquipage = (MembreEquipage) comboBoxMemEqup.getSelectedItem();
                 ArrayList<TypeAvion> typeAvions = new ArrayList<TypeAvion>();
 
-                if (!pasDeQualif1CheckBox.isSelected()) {
-                    if(!membreEquipage.qualifierSurUnVol((TypeAvion)comboBoxQualif1.getSelectedItem())){
-                        typeAvions.add((TypeAvion) comboBoxQualif1.getModel().getSelectedItem());
-                        comboBoxQualif1.getModel().setSelectedItem(comboBoxQualif1.getModel().getSelectedItem());
-                    }else {
-                        labelError.setText("Qualif 1 Membre equipage qualifier sur un un vol de ce type");
-                    }
 
-                }else {
+                if(!pasDeQualif1CheckBox.isSelected() && membreEquipage.getQualification().size()>=1){
+                    if(membreEquipage.qualifierSurUnVol(membreEquipage.getQualification().get(0))){
+                        comboBoxQualif1.getModel().setSelectedItem(membreEquipage.getQualification().get(0));
+                        typeAvions.add(membreEquipage.getQualification().get(0));
+                        labelError1.setText("Qualif 1 Membre equipage qualifier sur un un vol de ce type");
+                    }
+                }
+
+                else if (!pasDeQualif1CheckBox.isSelected()) {
+                    labelError1.setText("Add Qualif 1");
+                    typeAvions.add((TypeAvion) comboBoxQualif1.getModel().getSelectedItem());
+                    comboBoxQualif1.getModel().setSelectedItem(comboBoxQualif1.getModel().getSelectedItem());
+
+                }else{
                     comboBoxQualif1.getModel().setSelectedItem(null);
                 }
-                if (!pasDeQualif2CheckBox.isSelected()) {
-                    if(!membreEquipage.qualifierSurUnVol((TypeAvion)comboBoxQualif2.getSelectedItem())) {
-                        typeAvions.add((TypeAvion) comboBoxQualif2.getModel().getSelectedItem());
-                        comboBoxQualif2.getModel().setSelectedItem(comboBoxQualif2.getModel().getSelectedItem());
+
+                if(!pasDeQualif2CheckBox.isSelected() && membreEquipage.getQualification().size()>1){
+                    if(membreEquipage.qualifierSurUnVol(membreEquipage.getQualification().get(1))){
+                        comboBoxQualif2.getModel().setSelectedItem(membreEquipage.getQualification().get(1));
+                        typeAvions.add(membreEquipage.getQualification().get(1));
+                        labelError2.setText("Qualif 2 Membre equipage qualifier sur un un vol de ce type");
                     }
-                    else {
-                        labelError.setText("Qualif 2 Membre equipage qualifier sur un un vol de ce type");
-                    }
+                }
+                else if (!pasDeQualif2CheckBox.isSelected()) {
+                    labelError2.setText("Add qualif 2");
+                    typeAvions.add((TypeAvion) comboBoxQualif2.getModel().getSelectedItem());
+                    comboBoxQualif2.getModel().setSelectedItem(comboBoxQualif2.getModel().getSelectedItem());
+
                 }else {
                     comboBoxQualif2.getModel().setSelectedItem(null);
                 }
-                membreEquipage.setQualification(typeAvions);
-                tableauVols.addQualification(membreEquipage);
+
+
+                    membreEquipage.setQualification(typeAvions);
+                    tableauVols.addQualification(membreEquipage);
 
             }
         });
@@ -85,13 +99,13 @@ public class QualificationMembreEquipage extends JPanel {
         comboBoxQualif1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                labelError.setText("");
+                labelError1.setText("");
             }
         });
         comboBoxQualif2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                labelError.setText("");
+                labelError1.setText("");
             }
         });
     }
