@@ -28,6 +28,7 @@ public class AddMembreEquipage extends JPanel {
     private JLabel labelQualif2;
     private JCheckBox pasDeQualif1CheckBox;
     private JCheckBox pasDeQualif2CheckBox;
+    private JLabel labelError;
     private TableauVols tableauVols;
     public AddMembreEquipage() {
 
@@ -42,36 +43,42 @@ public class AddMembreEquipage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                if(comboBoxMetier.getSelectedItem().equals(TypeMembreEquipage.PILOTE)){
-                    Pilote pilote = new Pilote(textFieldNom.getText(),textFieldPrenom.getText());
-                    if(!pasDeQualif1CheckBox.isSelected()){
-                        pilote.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
+                    if(!textFieldNom.getText().equals("") && !textFieldPrenom.getText().equals("")){
+                        if(comboBoxMetier.getSelectedItem().equals(TypeMembreEquipage.PILOTE)){
+                            Pilote pilote = new Pilote(textFieldNom.getText(),textFieldPrenom.getText());
+                            if(!pasDeQualif1CheckBox.isSelected()){
+                                pilote.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
+                            }
+                            if(!pasDeQualif2CheckBox.isSelected()){
+                                pilote.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
+                            }
+                            tableauVols.addMembreEquipage(pilote);
+                        }else if(comboBoxMetier.getSelectedItem().equals(TypeMembreEquipage.COPILOTE)){
+                            CoPilote copilote = new CoPilote(textFieldNom.getText(),textFieldPrenom.getText());
+                            if(!pasDeQualif1CheckBox.isSelected()){
+                                copilote.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
+                            }
+                            if(!pasDeQualif2CheckBox.isSelected()){
+                                copilote.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
+                            }
+                            tableauVols.addMembreEquipage(copilote);
+                        }else{
+                            PNC pnc = new PNC(textFieldNom.getText(),textFieldPrenom.getText());
+                            if(!pasDeQualif1CheckBox.isSelected()){
+
+                                pnc.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
+                            }
+                            if(!pasDeQualif2CheckBox.isSelected()){
+                                pnc.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
+                            }
+
+                            tableauVols.addMembreEquipage(pnc);
+                            labelError.setText("Membre Equipage crée");
                     }
-                    if(!pasDeQualif2CheckBox.isSelected()){
-                        pilote.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
-                    }
-                    tableauVols.addMembreEquipage(pilote);
-                }else if(comboBoxMetier.getSelectedItem().equals(TypeMembreEquipage.COPILOTE)){
-                    CoPilote copilote = new CoPilote(textFieldNom.getText(),textFieldPrenom.getText());
-                    if(!pasDeQualif1CheckBox.isSelected()){
-                        copilote.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
-                    }
-                    if(!pasDeQualif2CheckBox.isSelected()){
-                        copilote.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
-                    }
-                    tableauVols.addMembreEquipage(copilote);
+
                 }else{
-                    PNC pnc = new PNC(textFieldNom.getText(),textFieldPrenom.getText());
-                    if(!pasDeQualif1CheckBox.isSelected()){
-
-                        pnc.addQualification((TypeAvion)comboBoxQualif1.getSelectedItem());
+                        labelError.setText("Il y a des champs vide");
                     }
-                    if(!pasDeQualif2CheckBox.isSelected()){
-                        pnc.addQualification((TypeAvion)comboBoxQualif2.getSelectedItem());
-                    }
-
-                    tableauVols.addMembreEquipage(pnc);
-                }
                 } catch (EquipageException e1) {
                     e1.printStackTrace();
                 } catch (InvariantBroken invariantBroken) {
@@ -84,6 +91,7 @@ public class AddMembreEquipage extends JPanel {
     }
 
     public void update() {
+        labelError.setText("");
         tableauVols = new TableauVols("AddMembreEquipage");
         //Qualification 1
         ArrayList<TypeAvion> tabTypeAvion = tableauVols.getTablaeuTypeAvion();

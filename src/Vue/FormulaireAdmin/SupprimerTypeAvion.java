@@ -1,5 +1,6 @@
 package Vue.FormulaireAdmin;
 
+import Modèle.EquipageException;
 import Modèle.TableauVols;
 import Modèle.TypeAvion;
 
@@ -31,9 +32,13 @@ public class SupprimerTypeAvion extends JPanel {
                         }
                     }
                     for(int j=0;j<tableauVols.getTableauMembreEquipage().size();j++){
-                        if(tableauVols.getTableauMembreEquipage().get(j).isQualified(typeAvion)){
-                            System.out.println("Qualified  ->" +tableauVols.getTableauMembreEquipage().get(j).getNom());
-                            exist = true;
+                        try {
+                            if(tableauVols.getTableauMembreEquipage().get(j).isQualified(typeAvion)){
+                                System.out.println("Qualified  ->" +tableauVols.getTableauMembreEquipage().get(j).getNom());
+                                exist = true;
+                            }
+                        } catch (EquipageException e1) {
+                            e1.printStackTrace();
                         }
                     }
                     if(!exist){

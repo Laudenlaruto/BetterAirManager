@@ -96,10 +96,14 @@ public class CreerVol extends JPanel {
                     Equipage equipage = new Equipage((Pilote)comboBoxPilot.getSelectedItem(),(CoPilote)comboBoxCopilot.getSelectedItem(),pncs,vol);
                     vol.setEquipage(equipage);
                     tableauVols.addVol(vol);
-                    update();
+                    try {
+                        update();
+                    } catch (EquipageException e1) {
+                        e1.printStackTrace();
+                    }
                     labelError.setText("Vol créer");
                 }else {
-                    System.out.println("Erreur dans la création de vol");
+                    labelError.setText("Erreur dans la création de vol");
                 }
             }
         });
@@ -113,15 +117,27 @@ public class CreerVol extends JPanel {
                 DefaultComboBoxModel<MembreEquipage> defPNC = new DefaultComboBoxModel<>();
                 for(int i = 0;i<membreEquipages.size();i++){
 
-                    if (membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.PILOTE)&& membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){
-                        defPilot.addElement(membreEquipages.get(i));
+                    try {
+                        if (membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.PILOTE)&& membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){
+                            defPilot.addElement(membreEquipages.get(i));
 
-                    }else if(membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.COPILOTE) && membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){
-                        defCoPilot.addElement(membreEquipages.get(i));
-                    }
-                    else if(membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.PNC) && membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){
-                            defPNC.addElement(membreEquipages.get(i));
+                        }else try {
+                            if(membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.COPILOTE) && membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){
+                                defCoPilot.addElement(membreEquipages.get(i));
+                            }
+                            else try {
+                                    if(membreEquipages.get(i).getMetier().equals(TypeMembreEquipage.PNC) && membreEquipages.get(i).isQualified((Avion)comboBoxAvion.getSelectedItem())){
+                                            defPNC.addElement(membreEquipages.get(i));
 
+                                    }
+                                } catch (EquipageException e1) {
+                                    e1.printStackTrace();
+                                }
+                        } catch (EquipageException e1) {
+                            e1.printStackTrace();
+                        }
+                    } catch (EquipageException e1) {
+                        e1.printStackTrace();
                     }
                 }
                 defaultTableModel.setRowCount(0);
@@ -161,7 +177,8 @@ public class CreerVol extends JPanel {
         });
     }
 
-    public void update() {
+    public void update() throws EquipageException {
+        labelError.setText("");
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("Nom");
         defaultTableModel.addColumn("Prenom");

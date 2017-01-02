@@ -1,6 +1,7 @@
 package Vue.FormulaireManager;
 
 import DataBase.TypeMembreEquipage;
+import Modèle.EquipageException;
 import Modèle.MembreEquipage;
 import Modèle.TableauVols;
 import Modèle.Vol;
@@ -36,8 +37,12 @@ public class DeleteMembre extends JPanel {
                 for (int i= 0;i<pncs.size();i++){
                     Vol vol = (Vol)comboBoxVol.getSelectedItem();
                     MembreEquipage membreEquipage = pncs.get(i);
-                    if(pncs.get(i).getMetier().equals(TypeMembreEquipage.PNC) && pncs.get(i).isQualified((Vol)comboBoxVol.getSelectedItem())&& vol.membreEquipageInVol(membreEquipage) ){
-                        defPNC.addElement(pncs.get(i));
+                    try {
+                        if(pncs.get(i).getMetier().equals(TypeMembreEquipage.PNC) && pncs.get(i).isQualified((Vol)comboBoxVol.getSelectedItem())&& vol.membreEquipageInVol(membreEquipage) ){
+                            defPNC.addElement(pncs.get(i));
+                        }
+                    } catch (EquipageException e1) {
+                        e1.printStackTrace();
                     }
                 }
                 comboBoxPNC.setModel(defPNC);
@@ -59,8 +64,12 @@ public class DeleteMembre extends JPanel {
         for (int i= 0;i<pncs.size();i++){
             Vol vol = (Vol)comboBoxVol.getSelectedItem();
             MembreEquipage membreEquipage = pncs.get(i);
-            if(pncs.get(i).getMetier().equals(TypeMembreEquipage.PNC) && pncs.get(i).isQualified((Vol)comboBoxVol.getSelectedItem())&& vol.membreEquipageInVol(membreEquipage) ){
-                defPNC.addElement(pncs.get(i));
+            try {
+                if(pncs.get(i).getMetier().equals(TypeMembreEquipage.PNC) && pncs.get(i).isQualified((Vol)comboBoxVol.getSelectedItem())&& vol.membreEquipageInVol(membreEquipage) ){
+                    defPNC.addElement(pncs.get(i));
+                }
+            } catch (EquipageException e) {
+                e.printStackTrace();
             }
         }
         comboBoxPNC.setModel(defPNC);

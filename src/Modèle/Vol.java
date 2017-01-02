@@ -46,33 +46,7 @@ public class Vol {
     public String toString(){
         return numeroDeVol;
     }
-    public void addPilote(Pilote pilote) throws EquipageException{
-        if(pilote.peutVoler(avion.getTypeAvion())) {
-            if (equipage.pilotIsSet()) {
-                equipage.setPilote(pilote);
-            } else {
-                throw new EquipageException(2);
-            }
-        }else{
-            throw new EquipageException(4);
-        }
-    }
-    public void addCoPilote(CoPilote coPilote) throws EquipageException{
-        if(equipage.coPilotIsSet() && coPilote.peutVoler(avion.getTypeAvion())){
-            equipage.setCoPilote(coPilote);
-        }else{
-            throw new EquipageException(2);
-        }
-    }
-    public void addPNC(PNC pnc) throws EquipageException{
-        if(avion.getTypeAvion().getNbPNCmax()>
-                equipage.getPNC().size() && pnc.peutVoler(avion.getTypeAvion())){
-            equipage.getPNC().add(pnc);
-        }else{
-            throw new EquipageException(3);
-        }
 
-    }
     public boolean equipagaAuComplet(){
         if (!equipage.PNCIsSet()) {
             return (!equipage.pilotIsSet() && !equipage.coPilotIsSet() && equipage.getPNC().size() >= avion.getTypeAvion().getNbPNCmin() && equipage.getPNC().size() <= avion.getTypeAvion().getNbPNCmax());

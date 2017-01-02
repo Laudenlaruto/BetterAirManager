@@ -10,6 +10,31 @@ import java.util.Objects;
 public class Aeroports implements Serializable {
     private File fichierAeroports = new File("src/DataBase/aeroports.txt");
     private ArrayList<String> nomAeroports;
+    private class size{
+        int size;
+        int capacité;
+
+        public size(int size, int capacité){
+            this.size = size;
+            this.capacité = capacité;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
+        }
+
+        public int getCapacité() {
+            return capacité;
+        }
+
+        public void setCapacité(int capacité) {
+            this.capacité = capacité;
+        }
+    }
     public Aeroports(){
         BufferedReader br = null;
         try {
@@ -51,7 +76,7 @@ public class Aeroports implements Serializable {
 
         try {
             flux = new ObjectInputStream(new FileInputStream(fichierAeroports));
-            nomAeroportsLu = (Object)flux.readObject();
+            nomAeroportsLu = flux.readObject();
             flux.close();
         } catch (IOException e) {
             System.out.println("Erreur lecture fichier "+e.toString());

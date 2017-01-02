@@ -7,8 +7,12 @@ import DataBase.TypeMembreEquipage;
  */
 public class Pilote extends MembreEquipage {
 
-    public Pilote(String nom, String prenom){
+    public Pilote(String nom, String prenom) throws InvariantBroken {
         super(nom,prenom, TypeMembreEquipage.PILOTE);
+        if(nom==null){
+            throw new InvariantBroken();
+        }
+
     }
 
 

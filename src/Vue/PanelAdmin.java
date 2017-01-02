@@ -1,5 +1,6 @@
 package Vue;
 
+import Modèle.EquipageException;
 import Vue.FormulaireAdmin.*;
 
 import javax.swing.*;
@@ -92,7 +93,11 @@ public class PanelAdmin extends JFrame{
         créerUnVolButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelCreerVol.update();
+                try {
+                    panelCreerVol.update();
+                } catch (EquipageException e1) {
+                    e1.printStackTrace();
+                }
                 card.show(panelMain,"CreerVol");
             }
         });

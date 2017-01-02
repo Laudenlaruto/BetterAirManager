@@ -19,21 +19,28 @@ public class CreerAvion extends JPanel{
     private JLabel labelTypeAvion;
     private JLabel labelRef;
     private JButton buttonCreerAvion;
+    private JLabel labelError;
     private TableauVols tableauVols;
     public CreerAvion() {
 
         buttonCreerAvion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TypeAvion typeAvion = (TypeAvion)comboBoxCreerAvion.getSelectedItem();
-                Avion avion = new Avion(typeAvion,textFieldRef.getText());
-                tableauVols.addAvion(avion);
-                textFieldRef.setText("");
+                if(!textFieldRef.getText().equals("")){
+                    TypeAvion typeAvion = (TypeAvion)comboBoxCreerAvion.getSelectedItem();
+                    Avion avion = new Avion(typeAvion,textFieldRef.getText());
+                    tableauVols.addAvion(avion);
+                    textFieldRef.setText("");
+                    labelError.setText("Avion créer");
+                }else{
+                    labelError.setText("Il y a des champs vide");
+                }
             }
         });
     }
 
     public void updateBox() {
+        labelError.setText("");
         tableauVols = new TableauVols("Suppresion Type Avion");
         ArrayList<TypeAvion> tabTypeAvion = tableauVols.getTablaeuTypeAvion();
         DefaultComboBoxModel def = new DefaultComboBoxModel();

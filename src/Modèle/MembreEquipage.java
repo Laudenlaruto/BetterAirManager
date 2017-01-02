@@ -35,7 +35,7 @@ public abstract class MembreEquipage {
             return true;
         }
     }
-    public boolean isQualified(TypeAvion typeAvion){
+    public boolean isQualified(TypeAvion typeAvion) throws EquipageException {
 
         if (qualification.size()==0){
             return false;
@@ -47,9 +47,12 @@ public abstract class MembreEquipage {
 
             return (qualification.get(0).getNom().equals(typeAvion.getNom()) || qualification.get(1).getNom().equals(typeAvion.getNom()));
         }
+        if (qualification.size()>2){
+            throw new EquipageException(1);
+        }
         return false;
     }
-    public boolean isQualified(Avion avion){
+    public boolean isQualified(Avion avion) throws EquipageException {
         if (qualification.size()==0){
             return false;
         }
@@ -58,6 +61,9 @@ public abstract class MembreEquipage {
         }
         if (qualification.size()==2){
             return (qualification.get(0).getNom().equals(avion.getTypeAvion().getNom()) || qualification.get(1).getNom().equals(avion.getTypeAvion().getNom()));
+        }
+        if (qualification.size()>2){
+            throw new EquipageException(1);
         }
         return false;
     }
@@ -90,7 +96,7 @@ public abstract class MembreEquipage {
         this.nom = nom;
     }
 
-    public boolean isQualified(Vol vol) {
+    public boolean isQualified(Vol vol) throws EquipageException {
         if (qualification.size()==0){
             return false;
         }
@@ -100,27 +106,42 @@ public abstract class MembreEquipage {
         if (qualification.size()==2){
             return (qualification.get(0).getNom().equals(vol.getAvion().getTypeAvion().getNom()) || qualification.get(1).getNom().equals(vol.getAvion().getTypeAvion().getNom()));
         }
+        if (qualification.size()>2){
+            throw new EquipageException(1);
+        }
         return false;
     }
 
     public boolean qualifierSurUnVol(TypeAvion typeAvion) {
         TableauVols tableauVols = new TableauVols("VerifQualifSurUnVol");
         for (int i=0;i<tableauVols.getTableauDeVols().size();i++){
+            try {
                 if(tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
                         tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
                         tableauVols.getTableauDeVols().get(i).getEquipage().getPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
                     return true;
                 }
-            if(tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
-                    tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
-                    tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
-                return true;
+            } catch (EquipageException e) {
+                e.printStackTrace();
             }
-            for (int j=0;j<tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().size();j++){
-                if(tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
+            try {
+                if(tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
                         tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
                         tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
                     return true;
+                }
+            } catch (EquipageException e) {
+                e.printStackTrace();
+            }
+            for (int j=0;j<tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().size();j++){
+                try {
+                    if(tableauVols.getTableauDeVols().get(i).getEquipage().getPNC().get(j).getNom().equals(this.getNom()) && //Si le membre equipage est le pilote
+                            tableauVols.getTableauDeVols().get(i).getAvion().getTypeAvion().getNom().equals(typeAvion.getNom())&& //Si le vol est bien du type de la qualification recherché
+                            tableauVols.getTableauDeVols().get(i).getEquipage().getCoPilote().isQualified(typeAvion) ){//Si le membre equipage est qualifié
+                        return true;
+                    }
+                } catch (EquipageException e) {
+                    e.printStackTrace();
                 }
             }
 
