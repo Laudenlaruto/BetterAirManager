@@ -18,6 +18,7 @@ public class EquipageException extends Exception {
                 break;
             case 4:
                 System.out.println("Membre d'équipage non qualifié");
+                break;
         }
     }
 }

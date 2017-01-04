@@ -7,14 +7,14 @@ import java.util.Objects;
 /**
  * Created by Titan on 10/12/2016.
  */
-public class Aeroports implements Serializable {
+public class Aeroports implements Serializable,InterfaceAeroports {
     private File fichierAeroports = new File("src/DataBase/aeroports.txt");
     private ArrayList<String> nomAeroports;
-    private class size{
+    private class Size{
         int size;
         int capacité;
 
-        public size(int size, int capacité){
+        public Size(int size, int capacité){
             this.size = size;
             this.capacité = capacité;
         }
@@ -117,7 +117,6 @@ public class Aeroports implements Serializable {
     public ArrayList<String> getNomAeroports() {
         return nomAeroports;
     }
-
     public void setNomAeroports(ArrayList<String> nomAeroports) {
         this.nomAeroports = nomAeroports;
     }
