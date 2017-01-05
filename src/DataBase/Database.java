@@ -14,7 +14,7 @@ public class Database {
         try {
             con = DriverManager.getConnection(url, user, password);
             Statement stt = con.createStatement();
-            stt.execute("use betterairmanager");
+            stt.execute("use betterairmanager");//Script SQL betterairmanager.sql
 
 
         } catch (SQLException e) {
